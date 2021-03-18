@@ -1,0 +1,49 @@
+.post-preview {
+    max-width: 616px;
+    margin-top: 60px;
+    border-radius: 3px;
+    button {
+        border: none;
+        background-color: transparent;
+    }
+    header {
+        height: 60px;
+        padding: 1rem;
+        img {
+            border-radius: 50%;
+            height: 2rem;
+            width: 2rem;
+            margin-inline-end: 0.875rem;
+            background-color: $border-color;
+        }
+        .title-container {
+            width: 100%;
+        }
+    }
+    .post-img {
+        width: 100%;
+    }
+    .social {
+        > header:first-of-type {
+            margin-top: 4px;
+            padding: 0 1rem;
+            height: fit-content;
+            > div {
+                button:not(:last-of-type) {
+                    margin-inline-end: 1rem;
+                }
+            }
+            button {
+                padding: 0.5rem 0;
+            }
+        }
+        > label:first-of-type {
+            padding: 0 1rem;
+            font-weight: 600;
+            font-size: 0.875em;
+        }
+    }
+    @media (min-width: $narrow-breakpoint) {
+        border: 1px solid $border-color;
+    }
+}

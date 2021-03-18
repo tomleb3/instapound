@@ -1,0 +1,19 @@
+.home-page {
+
+    .hero {
+        background: url("https://images.pexels.com/photos/633409/pexels-photo-633409.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+        width: 100vw;
+        height: 65vh;
+        transition: 0.3s;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+
+        @media (max-width: $narrow-breakpoint) {
+            height: 40vh;
+        }
+        @media (max-width: $mobile-breakpoint) {
+            height: 30vh;
+        }
+    }
+}

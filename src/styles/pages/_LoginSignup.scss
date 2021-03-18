@@ -1,0 +1,302 @@
+$sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/instapound/ig-sprites_yaw4wf.png);
+
+.login-signup {
+    height: 100vh;
+    overflow: hidden;
+    .content-top {
+        margin: 32px auto 0;
+        max-width: 935px;
+        padding-bottom: 32px;
+
+        .phones-img {
+            background-image: url(https://res.cloudinary.com/tomleb3/image/upload/v1615483077/instapound/loginSignup-page/phones-bg_iedvuj.png);
+            background-repeat: no-repeat;
+            height: 618px;
+            width: 438px;
+            margin-top: 50px;
+            div {
+                margin: 99px 0 0 151px;
+                position: relative;
+                img {
+                    height: 427px;
+                    width: 240px;
+                    position: absolute;
+                    animation: imgCrossFadeAnim 25s infinite ease-in-out;
+                    &:first-of-type {
+                        animation-delay: 20s;
+                    }
+                    &:nth-of-type(2) {
+                        animation-delay: 15s;
+                    }
+                    &:nth-of-type(3) {
+                        animation-delay: 10s;
+                    }
+                    &:nth-of-type(4) {
+                        animation-delay: 5s;
+                    }
+                    &:last-of-type {
+                        animation-delay: 0s;
+                    }
+                }
+
+                @keyframes imgCrossFadeAnim {
+                    0% {
+                        opacity: 1;
+                    }
+                    17% {
+                        opacity: 1;
+                    }
+                    25% {
+                        opacity: 0;
+                    }
+                    92% {
+                        opacity: 0;
+                    }
+                    100% {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+        .right-panel {
+            width: 350px;
+            > form,
+            .page-switch-container {
+                background-color: white;
+                width: 100%;
+                border: 1px solid $border-color;
+                border-radius: 1px;
+                margin: 0 0 10px;
+            }
+            > form {
+                padding: 10px 40px 20px;
+                &.frm-login {
+                    .logo {
+                        margin: 21px auto 36px;
+                    }
+                    .with-facebook-container {
+                        align-self: center;
+                        margin: 8px 40px;
+                        span {
+                            background-image: $sprites-url;
+                            background-repeat: no-repeat;
+                            background-position: -414px -259px;
+                            height: 16px;
+                            width: 16px;
+                            display: inline-block;
+                            margin-inline-end: 8px;
+                        }
+                        a {
+                            color: #385185;
+                            font-size: 0.875em;
+                            font-weight: 600;
+                        }
+                    }
+                    .forgot-pass {
+                        align-self: center;
+                        font-size: 0.75em;
+                        margin-top: 12px;
+                        line-height: 14px;
+                    }
+                }
+                &.frm-signup {
+                    .logo {
+                        margin: 20px auto 12px;
+                    }
+                    h2 {
+                        color: $muted-txt-color;
+                        font-size: 1.0625em;
+                        font-weight: 600;
+                        line-height: 20px;
+                        margin-bottom: 10px;
+                        text-align: center;
+                    }
+                    .btn-action {
+                        .facebook-icon {
+                            background-image: $sprites-url;
+                            background-repeat: no-repeat;
+                            display: inline-block;
+                            background-position: -414px -300px;
+                            height: 16px;
+                            width: 16px;
+                            margin-inline-end: 8px;
+                        }
+                        &:first-of-type {
+                            padding: 6px 9px;
+                        }
+                    }
+                    .terms-container {
+                        margin-bottom: 10px;
+                        p {
+                            color: $muted-txt-color;
+                            font-size: 0.75em;
+                            line-height: 16px;
+                            margin: 10px 0;
+                            text-align: center;
+                        }
+                        a {
+                            color: $muted-txt-color;
+                            font-weight: 600;
+                        }
+                    }
+                }
+                .logo {
+                    font-size: 2.55em;
+                    font-family: instapound;
+                    width: fit-content;
+                }
+                .input-container {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 6px;
+                    > span:first-of-type {
+                        color: $muted-txt-color;
+                        width: auto;
+                        position: absolute;
+                        left: 8px;
+                        font-size: 0.75em;
+                        user-select: none;
+                        pointer-events: none;
+                        transition: transform 0.2s, left 0.2s;
+                        &.on-top {
+                            transform: scale(0.83333) translateY(-10px);
+                            left: 0;
+                        }
+                    }
+                    input {
+                        padding: 9px 0 9px 8px;
+                        text-overflow: ellipsis;
+                        background: $body-color;
+                        border: 1px solid $border-color;
+                        border-radius: 3px;
+                        outline: none;
+                        width: 100%;
+                        font-size: 1em;
+                        &.while-typing {
+                            padding: 18px 0 4px 8px;
+                            font-size: 0.75em;
+                        }
+                    }
+                    .input-righthand-container {
+                        width: fit-content;
+                        height: fit-content;
+                        display: flex;
+                        align-items: flex-start;
+                        position: absolute;
+                        right: 6px;
+                        .show-password {
+                            border: none;
+                            background-color: inherit;
+                            font-weight: 600;
+                            font-size: 0.875em;
+                        }
+                        .indication-icon {
+                            background-image: $sprites-url;
+                            background-repeat: no-repeat;
+                            height: 22px;
+                            width: 22px;
+                            display: inline-block;
+                            margin-inline-end: 1px;
+                            &.icon-err {
+                                background-position: -249px -333px;
+                            }
+                            &.icon-ok {
+                                background-position: -225px -333px;
+                            }
+                        }
+                    }
+                }
+                .btn-action {
+                    background-color: rgba(0, 149, 246, 0.3);
+                    border: 1px solid transparent;
+                    color: white;
+                    font-weight: 600;
+                    padding: 5px 9px;
+                    border-radius: 4px;
+                    font-size: 0.875em;
+                    line-height: 18px;
+                    margin: 8px 0;
+                    pointer-events: none;
+                    cursor: default;
+                    &.active {
+                        background-color: #0095f6;
+                        pointer-events: auto;
+                        cursor: pointer;
+                    }
+                }
+                .divider-container {
+                    margin: 10px 0 18px;
+                    div {
+                        height: 1px;
+                        width: 100%;
+                        background-color: $border-color;
+                    }
+                    span {
+                        text-transform: uppercase;
+                        font-weight: 600;
+                        font-size: 0.8125em;
+                        line-height: 15px;
+                        color: $muted-txt-color;
+                        margin: 0 18px;
+                    }
+                }
+            }
+            .page-switch-container {
+                padding: 21px 0;
+                p {
+                    font-size: 0.875em;
+                    a {
+                        color: #0095f6;
+                        font-weight: 600;
+                    }
+                }
+            }
+            > label {
+                font-size: 14px;
+                line-height: 18px;
+                margin: 10px 20px 10px 20px;
+            }
+            .app-stores-container {
+                margin: 10px 0 10px 0;
+                a {
+                    &:first-of-type {
+                        margin-inline-end: 8px;
+                    }
+                    img {
+                        height: 40px;
+                    }
+                }
+            }
+        }
+    }
+    .content-bottom {
+        margin-bottom: 52px;
+        padding: 0 16px;
+        .links-container {
+            margin-top: 24px;
+            a {
+                color: $muted-txt-color;
+                font-size: 0.75em;
+                line-height: 14px;
+                margin: 0 8px 9px 8px;
+            }
+        }
+        .lang-copyright-container {
+            margin: 12px 0;
+            color: $muted-txt-color;
+            font-size: 0.75em;
+            div {
+                span {
+                }
+                svg {
+                    margin-inline-start: 4px;
+                    transform: rotate(180deg);
+                }
+            }
+            label {
+                margin-inline-start: 16px;
+            }
+        }
+    }
+}

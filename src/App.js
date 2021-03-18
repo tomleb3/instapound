@@ -1,26 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Fragment, useEffect } from 'react'
+import { connect } from 'react-redux'
+import { Switch, Route } from 'react-router-dom'
+import { Home } from './pages/Home.jsx'
+import { Direct } from './pages/Direct.jsx'
+import { Explore } from './pages/Explore.jsx'
+import { Activity } from './pages/Activity.jsx'
+import { LoginSignup } from './pages/LoginSignup.jsx'
+import { About } from './pages/About.jsx'
+import { AppHeader } from './cmps/AppHeader.jsx'
+import { loadPosts } from './store/actions/postActions.js'
+import { loadLikes } from './store/actions/likeActions.js'
+import { loadComments } from './store/actions/commentActions.js'
 
-function App() {
+const _App = ({ loadPosts, loadLikes, loadComments, loggedInUser }) => {
+
+  useEffect(() => {
+    const getData = async () => {
+      await loadPosts(loggedInUser)
+      await loadLikes(loggedInUser)
+      await loadComments(loggedInUser)
+    }
+    getData()
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="App" role="main">
+      {!loggedInUser ? <LoginSignup /> :
+        <Fragment>
+          <AppHeader />
+          <Switch>
+            <Route path="/about" component={About} />
+            <Route path="/activity" component={Activity} />
+            <Route path="/explore" component={Explore} />
+            <Route path="/direct" component={Direct} />
+            <Route path="/" component={Home} />
+          </Switch>
+        </Fragment>}
+    </main >
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    loggedInUser: state.userModule.loggedInUser
+  }
+}
+const mapDispatchToProps = {
+  loadPosts,
+  loadLikes,
+  loadComments,
+}
+export const App = connect(mapStateToProps, mapDispatchToProps)(_App)

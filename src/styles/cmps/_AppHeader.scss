@@ -1,0 +1,27 @@
+.app-header {
+    height: $header-height;
+    background-color: white;
+    border-bottom: 1px solid $border-color;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    section {
+        height: inherit;
+        .logo {
+            font-size: 2.2em;
+            font-family: instapound;
+        }
+        nav {
+            img {
+                height: 22px;
+                width: 22px;
+            }
+            *:not(:last-child) {
+                margin-inline-end: 1.5rem;
+            }
+        }
+    }
+}
