@@ -9,16 +9,17 @@ import { LoginSignup } from './pages/LoginSignup.jsx'
 import { About } from './pages/About.jsx'
 import { AppHeader } from './cmps/AppHeader.jsx'
 import { loadPosts } from './store/actions/postActions.js'
-import { loadLikes } from './store/actions/likeActions.js'
-import { loadComments } from './store/actions/commentActions.js'
+import { loadSubscriptions } from './store/actions/subscriptionActions.js'
 
-const _App = ({ loadPosts, loadLikes, loadComments, loggedInUser }) => {
+const _App = ({ loadPosts, loadSubscriptions, loggedInUser }) => {
 
   useEffect(() => {
     const getData = async () => {
-      await loadPosts(loggedInUser)
-      await loadLikes(loggedInUser)
-      await loadComments(loggedInUser)
+      await loadPosts()
+      await loadSubscriptions()
+
+      // console.log('posts:', await loadPosts())
+      console.log('subs:', await loadSubscriptions())
     }
     getData()
   }, [])
@@ -47,7 +48,6 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = {
   loadPosts,
-  loadLikes,
-  loadComments,
+  loadSubscriptions,
 }
 export const App = connect(mapStateToProps, mapDispatchToProps)(_App)

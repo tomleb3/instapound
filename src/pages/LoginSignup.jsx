@@ -13,7 +13,6 @@ const _LoginSignup = ({ loggedInUser, login, signup, }) => {
 
     const cloudinaryBaseUrl = process.env.REACT_APP_CLOUDINARY_BASE_URL
     const currPage = useLocation().pathname
-    const [userMsg, setUserMsg] = useState('')
     const [loginCred, setLoginCred] = useState({ username: '', password: '' })
     const [signupCred, setSignupCred] = useState({
         email: '',
@@ -22,19 +21,22 @@ const _LoginSignup = ({ loggedInUser, login, signup, }) => {
         password: ''
     })
     const [signupCredCheck, setSignupCredCheck] = useState({
+        emailOk: false,
+        usernameOk: false,
+        passwordOk: false,
+
         emailChecked: false,
         usernameChecked: false,
-        passwordChecked: false,
-        emailIsValid: false,
-        emailIsTaken: false,
-        usernameIsTaken: false,
-        passwordIsValid: false,
-        connectionOk: true
+        passwordChecked: false
     })
     const [userPrefs, setUserPrefs] = useState({
         lang: 'english',
         showPassword: false,
         darkMode: false
+    })
+    const [userMsg, setUserMsg] = useState({
+        show: false,
+        txt: ''
     })
 
     useEffect(() => {
@@ -59,79 +61,35 @@ const _LoginSignup = ({ loggedInUser, login, signup, }) => {
 
     const doLogin = async ev => {
         ev.preventDefault()
-        let { username, password } = loginCred
-        if (!username || !password) return setUserMsg('Please enter user/password')
-        // email = email.toLowerCase()
-        const userCreds = { username, password }
         try {
-            await login(userCreds)
+            await login(loginCred)
             if (localStorage['loggedInUser']) {
                 // socketService.emit('LOGIN', loggedInUser)
                 return <Redirect to="/"></Redirect>
             }
         } catch (err) {
-            return await setUserMsg('Login failed, try again.')
+            return setUserMsg({ show: true, txt: err.response.data.errMsg })
         }
     }
     const doSignup = async ev => {
         ev.preventDefault()
-        let { email, username, password, fullname } = signupCred
-        if (!email || !username || !password || !fullname) return setUserMsg('All inputs are required')
-        email = email.toLowerCase()
-
         try {
             await signup(signupCred)
             if (localStorage['loggedInUser']) return <Redirect to="/"></Redirect>
         }
         catch (err) {
-            return await setUserMsg('Signup failed, try again.')
+            return setUserMsg({ show: true, txt: err.response.data.errMsg })
         }
     }
 
-    const onCheckEmail = async () => {
+    const onCredCheck = async () => {
         try {
-            setSignupCredCheck({ ...signupCredCheck, emailChecked: false })
-            var emailPattern = new RegExp
-                (/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i)
-            const isEmailValid = emailPattern.test(signupCred.email)
-            const isEmailTaken = await userService.checkEmail(signupCred)
-            setSignupCredCheck({
-                ...signupCredCheck,
-                emailIsValid: isEmailValid,
-                emailIsTaken: isEmailTaken,
-                emailChecked: true
-            })
+            const credCheck = await userService.checkCreds(signupCred)
+            setSignupCredCheck(credCheck)
+            setUserMsg({ ...userMsg, txt: credCheck.errMsg })
         } catch (err) {
-            setSignupCredCheck({
-                ...signupCredCheck,
-                connectionOk: false
-            })
+            console.log(err)
         }
-    }
-    const onCheckUsername = async () => {
-        try {
-            setSignupCredCheck({ ...signupCredCheck, usernameChecked: false })
-            const isUsernameTaken = await userService.checkUsername(signupCred)
-            setSignupCredCheck({
-                ...signupCredCheck,
-                isUsernameTaken: isUsernameTaken,
-                usernameChecked: true
-            })
-        } catch (err) {
-            setSignupCredCheck({
-                ...signupCredCheck,
-                connectionOk: false
-            })
-        }
-    }
-    const onCheckPassword = () => {
-        setSignupCredCheck({ ...signupCredCheck, passwordChecked: false })
-        const isPasswordValid = signupCred.password.length >= 6
-        setSignupCredCheck({
-            ...signupCredCheck,
-            passwordIsValid: isPasswordValid,
-            passwordChecked: true
-        })
     }
 
     let signupSection = (
@@ -154,12 +112,12 @@ const _LoginSignup = ({ loggedInUser, login, signup, }) => {
                     className={signupCred.email && 'while-typing'}
                     value={signupCred.email}
                     onChange={signupHandleChange}
-                    onBlur={onCheckEmail}
+                    onBlur={onCredCheck}
                 />
                 <div className="input-righthand-container">
                     {signupCred.email && signupCredCheck.emailChecked && <span
-                        className={`indication-icon ${signupCredCheck.emailIsValid &&
-                            !signupCredCheck.emailIsTaken ? 'icon-ok' : 'icon-err'}`}></span>}
+                        className={`indication-icon ${signupCredCheck.emailOk
+                            ? 'icon-ok' : 'icon-err'}`}></span>}
                 </div>
             </div>
             <div className="input-container">
@@ -178,11 +136,11 @@ const _LoginSignup = ({ loggedInUser, login, signup, }) => {
                     className={signupCred.username && 'while-typing'}
                     value={signupCred.username}
                     onChange={signupHandleChange}
-                    onBlur={onCheckUsername}
+                    onBlur={onCredCheck}
                 />
                 <div className="input-righthand-container">
                     {signupCred.username && signupCredCheck.usernameChecked && <span
-                        className={`indication-icon ${signupCredCheck.isUsernameTaken ? 'icon-err' : 'icon-ok'}`}></span>}
+                        className={`indication-icon ${signupCredCheck.usernameOk ? 'icon-ok' : 'icon-err'}`}></span>}
                 </div>
             </div>
             <div className="input-container">
@@ -192,11 +150,11 @@ const _LoginSignup = ({ loggedInUser, login, signup, }) => {
                     className={signupCred.password && 'while-typing'}
                     value={signupCred.password}
                     onChange={signupHandleChange}
-                    onBlur={onCheckPassword}
+                    onBlur={onCredCheck}
                 />
                 <div className="input-righthand-container">
-                    {signupCred.password && signupCredCheck.passwordChecked && <span
-                        className={`indication-icon ${signupCredCheck.passwordIsValid ? 'icon-ok' : 'icon-err'}`}></span>}
+                    {signupCred.password && signupCredCheck.emailChecked && <span
+                        className={`indication-icon ${signupCredCheck.passwordOk ? 'icon-ok' : 'icon-err'}`}></span>}
                     {signupCred.password && <button type="button" className="show-password"
                         onClick={() => setUserPrefs({ ...userPrefs, showPassword: !userPrefs.showPassword })}>
                         {userPrefs.showPassword ? 'Hide' : 'Show'}</button>}
@@ -205,6 +163,7 @@ const _LoginSignup = ({ loggedInUser, login, signup, }) => {
             <button className={`btn-action ${signupCred.email &&
                 signupCred.username && signupCred.password.length >= 6 ? 'active' : ''}`}
                 type="submit">Sign Up</button>
+            {userMsg.show && <p className="user-msg">{userMsg.txt}</p>}
             <div className="terms-container">
                 <p>By signing up, you agree to our&nbsp;
                 <a href="">Terms</a>,&nbsp;
@@ -252,7 +211,7 @@ const _LoginSignup = ({ loggedInUser, login, signup, }) => {
                 <span></span>
                 <a href="">Log in with Facebook</a>
             </div>
-            <p className="clr-red fs14">{userMsg}</p>
+            {userMsg.show && <p className="user-msg">{userMsg.txt}</p>}
             <a href="" className="forgot-pass">Forgot password?</a>
         </form>
     )
@@ -277,8 +236,8 @@ const _LoginSignup = ({ loggedInUser, login, signup, }) => {
                 {(!loggedInUser && currPage !== '/signup') && loginSection}
                 {(!loggedInUser && currPage === '/signup') && signupSection}
                 <div className="page-switch-container flex j-center">
-                    {currPage === '/signup' ? <p>Have an account?&nbsp;<Link to="/login">Log in</Link></p>
-                        : <p>Don't have an account?&nbsp;<Link to="/signup">Sign up</Link></p>}
+                    {currPage === '/signup' ? <p>Have an account?&nbsp;<Link to="/login" onClick={() => setUserMsg({ show: false, txt: '' })}>Log in</Link></p>
+                        : <p>Don't have an account?&nbsp;<Link to="/signup" onClick={() => setUserMsg({ show: false, txt: '' })}>Sign up</Link></p>}
                 </div>
                 <label>Get the app.</label>
                 <div className="app-stores-container">

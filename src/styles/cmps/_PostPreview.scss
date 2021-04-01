@@ -14,16 +14,16 @@
             height: 2rem;
             width: 2rem;
             margin-inline-end: 0.875rem;
-            background-color: $border-color;
+            background-color: $clr-border;
         }
-        .title-container {
+        .user-container {
             width: 100%;
         }
     }
     .post-img {
         width: 100%;
     }
-    .social {
+    .social-container {
         > header:first-of-type {
             margin-top: 4px;
             padding: 0 1rem;
@@ -42,8 +42,48 @@
             font-weight: 600;
             font-size: 0.875em;
         }
+        time {
+            display: block;
+            font-size: rem(10px);
+            letter-spacing: 0.2px;
+            line-height: 18px;
+            padding: 0 1rem;
+            margin-bottom: 4px;
+            color: $clr-muted-txt;
+            text-transform: uppercase;
+        }
+        .add-comment-container {
+            border-top: 1px solid #efefef;
+            padding: 0 1rem;
+            margin-top: 4px;
+            font-size: rem(14px);
+            min-height: 56px;
+            button:first-of-type {
+                padding: 8px 16px 8px 0;
+            }
+            textarea {
+                height: 18px;
+                background: 0 0;
+                border: 0;
+                outline: 0;
+                padding: 0;
+                resize: none;
+                font-size: inherit;
+                flex: 1;
+            }
+            button:last-of-type {
+                font-weight: 600;
+                color: #0095f6;
+                background: 0 0;
+                user-select: none;
+                &.disabled {
+                    pointer-events: none;
+                    opacity: 0.3;
+                }
+            }
+        }
     }
     @media (min-width: $narrow-breakpoint) {
-        border: 1px solid $border-color;
+        border: 1px solid $clr-border;
     }
 }

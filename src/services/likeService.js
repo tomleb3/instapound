@@ -1,4 +1,3 @@
-// import { storageService } from './asyncStorageService'
 import { httpService } from './httpService'
 
 export const likeService = {
@@ -7,15 +6,14 @@ export const likeService = {
     remove
 }
 
-function query() {
-    // return storageService.query('like')
-    return httpService.get('like')
-}
-
-function add(post) {
+function query(post) {
     return httpService.post('like', post)
 }
 
-function remove(post) {
-    return httpService.delete('like', post)
+function add(like) {
+    return httpService.post('like/add', like)
+}
+
+function remove(like) {
+    return httpService.delete('like', like)
 }

@@ -64,7 +64,7 @@ $sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/in
             .page-switch-container {
                 background-color: white;
                 width: 100%;
-                border: 1px solid $border-color;
+                border: 1px solid $clr-border;
                 border-radius: 1px;
                 margin: 0 0 10px;
             }
@@ -97,6 +97,7 @@ $sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/in
                         font-size: 0.75em;
                         margin-top: 12px;
                         line-height: 14px;
+                        color: #00376b;
                     }
                 }
                 &.frm-signup {
@@ -104,7 +105,7 @@ $sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/in
                         margin: 20px auto 12px;
                     }
                     h2 {
-                        color: $muted-txt-color;
+                        color: $clr-muted-txt;
                         font-size: 1.0625em;
                         font-weight: 600;
                         line-height: 20px;
@@ -128,14 +129,14 @@ $sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/in
                     .terms-container {
                         margin-bottom: 10px;
                         p {
-                            color: $muted-txt-color;
+                            color: $clr-muted-txt;
                             font-size: 0.75em;
                             line-height: 16px;
                             margin: 10px 0;
                             text-align: center;
                         }
                         a {
-                            color: $muted-txt-color;
+                            color: $clr-muted-txt;
                             font-weight: 600;
                         }
                     }
@@ -151,7 +152,7 @@ $sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/in
                     align-items: center;
                     margin-bottom: 6px;
                     > span:first-of-type {
-                        color: $muted-txt-color;
+                        color: $clr-muted-txt;
                         width: auto;
                         position: absolute;
                         left: 8px;
@@ -167,8 +168,8 @@ $sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/in
                     input {
                         padding: 9px 0 9px 8px;
                         text-overflow: ellipsis;
-                        background: $body-color;
-                        border: 1px solid $border-color;
+                        background: $clr-body;
+                        border: 1px solid $clr-border;
                         border-radius: 3px;
                         outline: none;
                         width: 100%;
@@ -215,7 +216,6 @@ $sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/in
                     padding: 5px 9px;
                     border-radius: 4px;
                     font-size: 0.875em;
-                    line-height: 18px;
                     margin: 8px 0;
                     pointer-events: none;
                     cursor: default;
@@ -225,19 +225,26 @@ $sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/in
                         cursor: pointer;
                     }
                 }
+                .user-msg {
+                    line-height: 18px;
+                    color: #ed4956;
+                    font-size: 0.875em;
+                    text-align: center;
+                    margin: 10px 0;
+                }
                 .divider-container {
                     margin: 10px 0 18px;
                     div {
                         height: 1px;
                         width: 100%;
-                        background-color: $border-color;
+                        background-color: $clr-border;
                     }
                     span {
                         text-transform: uppercase;
                         font-weight: 600;
                         font-size: 0.8125em;
                         line-height: 15px;
-                        color: $muted-txt-color;
+                        color: $clr-muted-txt;
                         margin: 0 18px;
                     }
                 }
@@ -276,7 +283,7 @@ $sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/in
         .links-container {
             margin-top: 24px;
             a {
-                color: $muted-txt-color;
+                color: $clr-muted-txt;
                 font-size: 0.75em;
                 line-height: 14px;
                 margin: 0 8px 9px 8px;
@@ -284,7 +291,7 @@ $sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/in
         }
         .lang-copyright-container {
             margin: 12px 0;
-            color: $muted-txt-color;
+            color: $clr-muted-txt;
             font-size: 0.75em;
             div {
                 span {

@@ -1,10 +1,10 @@
 import { likeService } from "../../services/likeService"
 
-export function loadLikes(filterBy) {
+export function loadLikes(post) {
     return async dispatch => {
         try {
-            const likes = await likeService.query(filterBy)
-            if (!filterBy) dispatch({ type: 'SET_LIKES', likes })
+            const likes = await likeService.query(post)
+            dispatch({ type: 'SET_LIKES', likes })
             return likes
         } catch (err) {
             console.log('likeActions:', err)

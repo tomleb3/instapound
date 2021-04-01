@@ -10,8 +10,7 @@ export const userService = {
     remove,
     update,
     getLoggedinUser,
-    checkEmail,
-    checkUsername
+    checkCreds
 }
 
 window.userService = userService
@@ -58,11 +57,12 @@ async function logout() {
     return await httpService.post('auth/logout')
 }
 
-async function checkEmail(userCred) {
-    return await httpService.post('auth/checkemail', userCred)
-}
-async function checkUsername(userCred) {
-    return await httpService.post('auth/checkusername', userCred)
+async function checkCreds(userCred) {
+    try {
+        return await httpService.post('auth/checkcred', userCred)
+    } catch (err) {
+        throw err
+    }
 }
 
 function _saveLocalUser(user) {

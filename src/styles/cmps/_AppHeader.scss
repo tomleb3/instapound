@@ -1,7 +1,7 @@
 .app-header {
     height: $header-height;
     background-color: white;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid $clr-border;
     position: fixed;
     z-index: 10;
     top: 0;
@@ -11,7 +11,7 @@
     section {
         height: inherit;
         .logo {
-            font-size: 2.2em;
+            font-size: 1.6em;
             font-family: instapound;
         }
         nav {

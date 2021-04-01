@@ -8,19 +8,19 @@ export const commentService = {
     remove
 }
 
-function query() {
+function query(post) {
     // return storageService.query('comment')
-    return httpService.get('comment')
-}
-
-function add(post) {
     return httpService.post('comment', post)
 }
 
-function edit(post) {
-    return httpService.post('comment', post)
+function add(comment) {
+    return httpService.post('comment/add', comment)
 }
 
-function remove(post) {
-    return httpService.delete('comment', post)
+function edit(comment) {
+    return httpService.put('comment', comment)
+}
+
+function remove(comment) {
+    return httpService.delete('comment', comment)
 }

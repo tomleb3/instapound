@@ -3,7 +3,7 @@ import { PostList } from '../cmps/PostList'
 
 const _Home = ({ posts }) => {
 
-    return <main className="home-page main-layout m-page">
+    return <main className="home-page main-layout">
         <PostList posts={posts} />
     </main>
 }

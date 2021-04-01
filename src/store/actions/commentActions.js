@@ -1,11 +1,10 @@
 import { commentService } from "../../services/commentService"
 
-export function loadComments(filterBy) {
+export function loadComments(post) {
     return async dispatch => {
         try {
-            const comments = await commentService.query(filterBy)
-            if (!filterBy) dispatch({ type: 'SET_COMMENTS', comments })
-            console.log(comments)
+            const comments = await commentService.query(post)
+            dispatch({ type: 'SET_COMMENTS', comments })
             return comments
         } catch (err) {
             console.log('commentActions:', err)
