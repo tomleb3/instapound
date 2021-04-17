@@ -1,7 +1,15 @@
+import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { PostList } from '../cmps/PostList'
+import { loadPosts } from '../store/actions/postActions.js'
 
-const _Home = ({ posts }) => {
+const _Home = () => {
+
+    const [posts, setPosts] = useState([])
+
+    useEffect(() => {
+        (async () => setPosts(await loadPosts()))()
+    }, [])
 
     return <main className="home-page main-layout">
         <PostList posts={posts} />
@@ -15,4 +23,7 @@ const mapStateToProps = state => {
         // comments: state.postModule.posts,
     }
 }
-export const Home = connect(mapStateToProps)(_Home)
+const mapDispatchToProps = {
+    loadPosts,
+}
+export const Home = connect(mapStateToProps, mapDispatchToProps)(_Home)

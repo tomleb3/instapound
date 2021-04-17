@@ -37,10 +37,24 @@
                 padding: 0.5rem 0;
             }
         }
-        > label:first-of-type {
+        .lbl-likes {
             padding: 0 1rem;
             font-weight: 600;
             font-size: 0.875em;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .comment-section {
+            padding: 0 1rem;
+            font-size: rem(14px);
+            * {
+                margin-bottom: 4px;
+            }
+            a {
+                font-weight: 600;
+            }
+            span {
+            }
         }
         time {
             display: block;

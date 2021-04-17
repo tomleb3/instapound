@@ -1,4 +1,3 @@
-// import { storageService } from './asyncStorageService'
 import { httpService } from './httpService'
 
 export const commentService = {
@@ -9,12 +8,11 @@ export const commentService = {
 }
 
 function query(post) {
-    // return storageService.query('comment')
-    return httpService.post('comment', post)
+    return httpService.get(`comment?postId=${post._id}`)
 }
 
 function add(comment) {
-    return httpService.post('comment/add', comment)
+    return httpService.post('comment', comment)
 }
 
 function edit(comment) {

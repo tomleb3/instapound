@@ -1,43 +1,43 @@
 // FONT SIZES
 
 .fs12 {
-    font-size: rem(12px);
+    font-size: rem(12px) !important;
 }
 .fs14 {
-    font-size: rem(14px);
+    font-size: rem(14px) !important;
 }
 .fs18 {
-    font-size: rem(18px);
+    font-size: rem(18px) !important;
 }
 .fs20 {
-    font-size: rem(20px);
+    font-size: rem(20px) !important;
 }
 .fs24 {
-    font-size: rem(24px);
+    font-size: rem(24px) !important;
 }
 .fs28 {
-    font-size: rem(28px);
+    font-size: rem(28px) !important;
 }
 .fs30 {
-    font-size: rem(30px);
+    font-size: rem(30px) !important;
 }
 
 // FONT WEIGHTS
 
 .fw300 {
-    font-weight: 300;
+    font-weight: 300 !important;
 }
 .fw400 {
-    font-weight: 400;
+    font-weight: 400 !important;
 }
 .fw600 {
-    font-weight: 600;
+    font-weight: 600 !important;
 }
 .fw700 {
-    font-weight: 700;
+    font-weight: 700 !important;
 }
 .fw800 {
-    font-weight: 800;
+    font-weight: 800 !important;
 }
 
 // DISPLAY
@@ -231,8 +231,9 @@
 }
 
 .muted {
-    font-size: 0.9em;
-    opacity: 0.5;
+    // font-size: 0.9em;
+    // opacity: 0.5;
+    color: $clr-muted-txt;
 }
 
 .pointer {

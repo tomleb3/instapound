@@ -7,13 +7,13 @@ export const likeService = {
 }
 
 function query(post) {
-    return httpService.post('like', post)
+    return httpService.get(`like?postId=${post._id}`)
 }
 
-function add(like) {
-    return httpService.post('like/add', like)
+function add(postId) {
+    return httpService.post(`like/${postId}`)
 }
 
-function remove(like) {
-    return httpService.delete('like', like)
+function remove(likeId) {
+    return httpService.delete(`like/${likeId}`)
 }

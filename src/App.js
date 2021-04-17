@@ -6,22 +6,15 @@ import { Direct } from './pages/Direct.jsx'
 import { Explore } from './pages/Explore.jsx'
 import { Activity } from './pages/Activity.jsx'
 import { LoginSignup } from './pages/LoginSignup.jsx'
+import { UserProfile } from './pages/UserProfile.jsx'
 import { About } from './pages/About.jsx'
 import { AppHeader } from './cmps/AppHeader.jsx'
-import { loadPosts } from './store/actions/postActions.js'
 import { loadSubscriptions } from './store/actions/subscriptionActions.js'
 
-const _App = ({ loadPosts, loadSubscriptions, loggedInUser }) => {
+const _App = ({ loadSubscriptions, loggedInUser }) => {
 
   useEffect(() => {
-    const getData = async () => {
-      await loadPosts()
-      await loadSubscriptions()
-
-      // console.log('posts:', await loadPosts())
-      console.log('subs:', await loadSubscriptions())
-    }
-    getData()
+    (async () => await loadSubscriptions())()
   }, [])
 
   return (
@@ -30,6 +23,7 @@ const _App = ({ loadPosts, loadSubscriptions, loggedInUser }) => {
         <Fragment>
           <AppHeader />
           <Switch>
+            <Route path="/:username" component={UserProfile} />
             <Route path="/about" component={About} />
             <Route path="/activity" component={Activity} />
             <Route path="/explore" component={Explore} />
@@ -47,7 +41,6 @@ const mapStateToProps = state => {
   }
 }
 const mapDispatchToProps = {
-  loadPosts,
   loadSubscriptions,
 }
 export const App = connect(mapStateToProps, mapDispatchToProps)(_App)
