@@ -8,12 +8,18 @@ $sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/in
         max-width: 935px;
         padding-bottom: 32px;
 
+        @media (max-width: 450px) {
+            margin: auto;
+        }
         .phones-img {
             background-image: url(https://res.cloudinary.com/tomleb3/image/upload/v1615483077/instapound/loginSignup-page/phones-bg_iedvuj.png);
             background-repeat: no-repeat;
             height: 618px;
             width: 438px;
             margin-top: 50px;
+            @media (max-width: 875px) {
+                display: none;
+            }
             div {
                 margin: 99px 0 0 151px;
                 position: relative;
@@ -60,6 +66,9 @@ $sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/in
         }
         .right-panel {
             width: 350px;
+            @media (max-width: 450px) {
+                justify-content: initial;
+            }
             > form,
             .page-switch-container {
                 background-color: white;
@@ -67,12 +76,16 @@ $sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/in
                 border: 1px solid $clr-border;
                 border-radius: 1px;
                 margin: 0 0 10px;
+                @media (max-width: 450px) {
+                    border: none;
+                    background-color: transparent;
+                }
             }
             > form {
                 padding: 10px 40px 20px;
                 &.frm-login {
                     .logo {
-                        margin: 21px auto 36px;
+                        margin: 30px auto 55px;
                     }
                     .with-facebook-container {
                         align-self: center;
@@ -102,7 +115,7 @@ $sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/in
                 }
                 &.frm-signup {
                     .logo {
-                        margin: 20px auto 12px;
+                        margin: 30px auto 35px;
                     }
                     h2 {
                         color: $clr-muted-txt;
