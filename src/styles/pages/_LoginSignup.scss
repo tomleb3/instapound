@@ -5,7 +5,6 @@ $sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/in
     overflow: hidden;
     .content-top {
         margin: 32px auto 0;
-        max-width: 935px;
         padding-bottom: 32px;
 
         @media (max-width: 450px) {
@@ -306,15 +305,13 @@ $sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/in
             margin: 12px 0;
             color: $clr-muted-txt;
             font-size: 0.75em;
-            div {
-                span {
-                }
-                svg {
+            > div {
+                > svg {
                     margin-inline-start: 4px;
                     transform: rotate(180deg);
                 }
             }
-            label {
+            > label {
                 margin-inline-start: 16px;
             }
         }

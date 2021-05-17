@@ -10,11 +10,12 @@ import { UserProfile } from './pages/UserProfile.jsx'
 import { About } from './pages/About.jsx'
 import { AppHeader } from './cmps/AppHeader.jsx'
 import { loadSubscriptions } from './store/actions/subscriptionActions.js'
+import { AppFooter } from './cmps/AppFooter.jsx'
 
 const _App = ({ loadSubscriptions, loggedInUser }) => {
 
   useEffect(() => {
-    (async () => await loadSubscriptions())()
+    // (async () => await loadSubscriptions())()
   }, [])
 
   return (
@@ -23,11 +24,33 @@ const _App = ({ loadSubscriptions, loggedInUser }) => {
         <Fragment>
           <AppHeader />
           <Switch>
-            <Route path="/:username" component={UserProfile} />
-            <Route path="/about" component={About} />
-            <Route path="/activity" component={Activity} />
-            <Route path="/explore" component={Explore} />
-            <Route path="/direct" component={Direct} />
+            <Route path="/about/" component={About} />
+            <Route path="/activity/" component={Activity} />
+            <Route path="/explore/" render={() => <Fragment>
+              <Explore />
+              <AppFooter />
+            </Fragment>} />
+            <Route path="/direct/" component={Direct} />
+            <Route path="/:username/tagged/"
+              render={() => <Fragment>
+                <UserProfile currTab="tagged" />
+                <AppFooter />
+              </Fragment>} />
+            <Route path="/:username/saved/"
+              render={() => <Fragment>
+                <UserProfile currTab="saved" />
+                <AppFooter />
+              </Fragment>} />
+            <Route path="/:username/channel/"
+              render={() => <Fragment>
+                <UserProfile currTab="channel" />
+                <AppFooter />
+              </Fragment>} />
+            <Route path="/:username/"
+              render={() => <Fragment>
+                <UserProfile currTab="posts" />
+                <AppFooter />
+              </Fragment>} />
             <Route path="/" component={Home} />
           </Switch>
         </Fragment>}

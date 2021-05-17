@@ -6,7 +6,7 @@ export const userService = {
     logout,
     signup,
     getUsers,
-    getById,
+    getByUsername,
     remove,
     update,
     getLoggedinUser,
@@ -16,13 +16,11 @@ export const userService = {
 window.userService = userService
 
 function getUsers() {
-    // return storageService.query('user')
     return httpService.get(`user`)
 }
 
-function getById(userId) {
-    // return storageService.get('user', userId)
-    return httpService.get(`user/${userId}`)
+function getByUsername(username){
+    return httpService.get(`user/${username}`)
 }
 
 function remove(userId) {

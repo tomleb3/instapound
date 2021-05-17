@@ -1,18 +1,22 @@
 import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { PostList } from '../cmps/PostList'
-import { loadPosts } from '../store/actions/postActions.js'
+import { AppFooter } from '../cmps/AppFooter'
+import { FeedList } from '../cmps/FeedList'
+import { postService } from '../services/postService'
 
 const _Home = () => {
 
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
-        (async () => setPosts(await loadPosts()))()
+        (async () => setPosts(await postService.getFeed()))()
     }, [])
 
     return <main className="home-page main-layout">
-        <PostList posts={posts} />
+        <FeedList posts={posts} />
+        <article className="suggestions-container">
+            <AppFooter homePage />
+        </article>
     </main>
 }
 
@@ -23,7 +27,4 @@ const mapStateToProps = state => {
         // comments: state.postModule.posts,
     }
 }
-const mapDispatchToProps = {
-    loadPosts,
-}
-export const Home = connect(mapStateToProps, mapDispatchToProps)(_Home)
+export const Home = connect(mapStateToProps)(_Home)

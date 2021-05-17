@@ -1,3 +1,167 @@
+$sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/instapound/ig-sprites_yaw4wf.png);
+
 .user-profile {
-    
+    @media (min-width: 736px) {
+        padding: 30px 20px 0;
+    }
+    > header {
+        margin-bottom: 44px;
+        .user-img-container {
+            flex-basis: 0;
+            margin-right: 30px;
+            @media (max-width: 735px) {
+                height: 77px;
+                width: 77px;
+            }
+            .user-img {
+                height: 150px;
+                width: 150px;
+                border-radius: 50%;
+            }
+            .user-img,
+            span {
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+            }
+        }
+        .user-info-container,
+        > span {
+            flex-basis: 30px;
+            flex-grow: 2;
+            display: block;
+            .react-loading-skeleton {
+                height: 100%;
+            }
+        }
+        .user-info-container {
+            > header {
+                margin-bottom: 20px;
+                > label {
+                    font-size: rem(28px);
+                    font-weight: 300;
+                }
+                > a {
+                    border: 1px solid #dbdbdb;
+                    background-color: transparent;
+                    border-radius: 4px;
+                    padding: 5px 9px;
+                    font-weight: 600;
+                    font-size: rem(14px);
+                    margin-left: 20px;
+                    margin-right: 5px;
+                }
+                > div {
+                    padding: 8px;
+                }
+            }
+            > main {
+                margin-bottom: 20px;
+                label {
+                    &:not(:last-of-type) {
+                        margin-right: 40px;
+                    }
+                    span {
+                        font-weight: 600;
+                    }
+                }
+            }
+            > footer {
+                line-height: 24px;
+                word-wrap: break-word;
+                h1 {
+                    font-size: rem(16px);
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+    > main {
+        .tab-switch-container {
+            border-top: 1px solid $clr-border;
+            font-size: rem(12px);
+            font-weight: 600;
+            > a {
+                height: 52px;
+                > label {
+                    margin-left: 6px;
+                    letter-spacing: 1px;
+                    color: $clr-muted-txt;
+                    cursor: pointer;
+                }
+                &.active-tab {
+                    border-top: 1px solid $clr-txt;
+                    margin-top: -1px;
+                    > label {
+                        color: $clr-txt;
+                    }
+                }
+                &:not(:last-of-type) {
+                    margin-right: 60px;
+                }
+            }
+        }
+        .posts-container {
+            > section {
+                display: flex;
+                margin-bottom: 28px;
+                > article {
+                    flex: 1 0 0%;
+                    &:not(:last-of-type) {
+                        margin-right: 28px;
+                    }
+                    &:hover {
+                        > a > div {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            position: absolute;
+                            top: 0;
+                            height: inherit;
+                            width: inherit;
+                            background: rgba(0, 0, 0, 0.3);
+                            > div {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                &:first-of-type {
+                                    margin-inline-end: 30px;
+                                    > span {
+                                        background-position: -340px -333px;
+                                    }
+                                }
+                                &:last-of-type {
+                                    > span {
+                                        background-position: -382px -333px;
+                                    }
+                                }
+                                > span {
+                                    background-image: $sprites-url;
+                                    background-repeat: no-repeat;
+                                    height: 19px;
+                                    width: 19px;
+                                    margin-inline-end: 7px;
+                                }
+                                > label {
+                                    color: white;
+                                    font-weight: 600;
+                                }
+                            }
+                        }
+                    }
+                    > a {
+                        display: block;
+                        height: 100%;
+                        width: 100%;
+                        position: relative;
+                    }
+                    .post-img {
+                        height: 100%;
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
+    }
 }

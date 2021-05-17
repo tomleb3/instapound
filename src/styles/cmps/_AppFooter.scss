@@ -1,3 +1,38 @@
 .app-footer {
-    
+    margin-bottom: 52px;
+    color: $clr-muted-txt;
+    font-size: rem(12px);
+    .links-container {
+        margin-top: 24px;
+        > a {
+            margin: 0 8px 12px 8px;
+        }
+    }
+    .lang-copyright-container {
+        > div {
+            > svg {
+                margin-inline-start: 4px;
+                transform: rotate(180deg);
+            }
+        }
+        > label {
+            margin-inline-start: 16px;
+        }
+    }
+    &.for-home-page {
+        color: #c7c7c7;
+        font-size: rem(11px);
+        .links-container {
+            justify-content: flex-start;
+            margin-bottom: 19px;
+            > a {
+                margin: 0;
+                line-height: 13px;
+                &:not(:last-of-type)::after {
+                    content: "\00B7";
+                    margin: 0 0.25em 0 0.25em;
+                }
+            }
+        }
+    }
 }

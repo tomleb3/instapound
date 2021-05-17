@@ -1,7 +1,7 @@
-.post-preview {
+.feed-preview {
     max-width: 616px;
-    margin-top: 60px;
     border-radius: 3px;
+    margin-top: 60px;
     button {
         border: none;
         background-color: transparent;
@@ -22,6 +22,7 @@
     }
     .post-img {
         width: 100%;
+        object-fit: cover;
     }
     .social-container {
         > header:first-of-type {

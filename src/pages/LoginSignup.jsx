@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link, Redirect, useLocation } from 'react-router-dom'
-
 import { userService } from '../services/userService'
 import {
     login,
@@ -30,7 +29,7 @@ const _LoginSignup = ({ loggedInUser, login, signup, }) => {
         passwordChecked: false
     })
     const [userPrefs, setUserPrefs] = useState({
-        lang: 'english',
+        language: 'english',
         showPassword: false,
         darkMode: false
     })
@@ -42,7 +41,7 @@ const _LoginSignup = ({ loggedInUser, login, signup, }) => {
     useEffect(() => {
         window.scrollTo(0, 0)
         if (loggedInUser) return <Redirect to="/"></Redirect> // Might now work, check in later stage
-    }, [])
+    }, [loggedInUser])
 
     const loginHandleChange = ev => {
         const { name, value } = ev.target
@@ -166,10 +165,10 @@ const _LoginSignup = ({ loggedInUser, login, signup, }) => {
             {userMsg.show && <p className="user-msg">{userMsg.txt}</p>}
             <div className="terms-container">
                 <p>By signing up, you agree to our&nbsp;
-                <a href="">Terms</a>,&nbsp;
-                <a href="">Data Policy</a>
+                <a href="https://www.google.com/">Terms</a>,&nbsp;
+                <a href="https://www.google.com/">Data Policy</a>
                 &nbsp;and&nbsp;
-                <a href="">Cookies Policy</a>&nbsp;.
+                <a href="https://www.google.com/">Cookies Policy</a>&nbsp;.
             </p>
             </div>
         </form>
@@ -209,10 +208,10 @@ const _LoginSignup = ({ loggedInUser, login, signup, }) => {
             </div>
             <div className="with-facebook-container flex a-center">
                 <span></span>
-                <a href="">Log in with Facebook</a>
+                <a href="https://www.google.com/">Log in with Facebook</a>
             </div>
             {userMsg.show && <p className="user-msg">{userMsg.txt}</p>}
-            <a href="" className="forgot-pass">Forgot password?</a>
+            <a href="https://www.google.com/" className="forgot-pass">Forgot password?</a>
         </form>
     )
     let forgotPassword = (
@@ -257,30 +256,30 @@ const _LoginSignup = ({ loggedInUser, login, signup, }) => {
         <section className="content-bottom">
             <article className="links-container">
                 <div className="flex wrap j-center">
-                    <a href="">About</a>
-                    <a href="">Blog</a>
-                    <a href="">Jobs</a>
-                    <a href="">Help</a>
-                    <a href="">API</a>
-                    <a href="">Privacy</a>
-                    <a href="">Terms</a>
-                    <a href="">Top Accounts</a>
-                    <a href="">Hashtags</a>
-                    <a href="">Locations</a>
+                    <a href="https://www.google.com/">About</a>
+                    <a href="https://www.google.com/">Blog</a>
+                    <a href="https://www.google.com/">Jobs</a>
+                    <a href="https://www.google.com/">Help</a>
+                    <a href="https://www.google.com/">API</a>
+                    <a href="https://www.google.com/">Privacy</a>
+                    <a href="https://www.google.com/">Terms</a>
+                    <a href="https://www.google.com/">Top Accounts</a>
+                    <a href="https://www.google.com/">Hashtags</a>
+                    <a href="https://www.google.com/">Locations</a>
                 </div>
                 <div className="flex wrap j-center">
-                    <a href="">Beauty</a>
-                    <a href="">Dance & Performance</a>
-                    <a href="">Fitness</a>
-                    <a href="">Food & Drink</a>
-                    <a href="">Home & Garden</a>
-                    <a href="">Music</a>
-                    <a href="">Visual Arts</a>
+                    <a href="https://www.google.com/">Beauty</a>
+                    <a href="https://www.google.com/">Dance & Performance</a>
+                    <a href="https://www.google.com/">Fitness</a>
+                    <a href="https://www.google.com/">Food & Drink</a>
+                    <a href="https://www.google.com/">Home & Garden</a>
+                    <a href="https://www.google.com/">Music</a>
+                    <a href="https://www.google.com/">Visual Arts</a>
                 </div>
             </article>
             <article className="lang-copyright-container flex j-center">
                 <div className="flex a-center pointer">
-                    <span className="capitalize">{userPrefs.lang}</span>
+                    <span className="capitalize">{userPrefs.language}</span>
                     <svg aria-label="Down Chevron Icon" className="_8-yf5 " fill="#8e8e8e" height="12" viewBox="0 0 48 48" width="12">
                         <path d="M40 33.5c-.4 0-.8-.1-1.1-.4L24 18.1l-14.9 15c-.6.6-1.5.6-2.1 0s-.6-1.5
                      0-2.1l16-16c.6-.6 1.5-.6 2.1 0l16 16c.6.6.6 1.5 0 2.1-.3.3-.7.4-1.1.4z"></path>
