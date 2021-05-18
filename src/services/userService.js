@@ -9,17 +9,16 @@ export const userService = {
     getByUsername,
     remove,
     update,
-    getLoggedinUser,
+    getLoggedInUser,
     checkCreds
 }
 
-window.userService = userService
-
-function getUsers() {
-    return httpService.get(`user`)
+function getUsers(filterTxt = '') {
+    const queryStr = filterTxt ? `?name=${filterTxt}` : ''
+    return httpService.get(`user${queryStr}`)
 }
 
-function getByUsername(username){
+function getByUsername(username) {
     return httpService.get(`user/${username}`)
 }
 
@@ -32,7 +31,7 @@ async function update(user) {
     // return storageService.put('user', user)
     user = await httpService.put(`user/${user._id}`, user)
     // Handle case in which admin updates other user's details
-    if (getLoggedinUser()._id === user._id) _saveLocalUser(user)
+    if (getLoggedInUser()._id === user._id) _saveLocalUser(user)
 }
 
 async function login(userCred) {
@@ -51,8 +50,12 @@ async function signup(userCred) {
 }
 
 async function logout() {
-    localStorage.clear()
-    return await httpService.post('auth/logout')
+    try {
+        localStorage.clear()
+        return await httpService.post('auth/logout')
+    } catch (err) {
+        throw err
+    }
 }
 
 async function checkCreds(userCred) {
@@ -68,6 +71,6 @@ function _saveLocalUser(user) {
     return user
 }
 
-function getLoggedinUser() {
+function getLoggedInUser() {
     return JSON.parse(localStorage.getItem('loggedInUser'))
 }

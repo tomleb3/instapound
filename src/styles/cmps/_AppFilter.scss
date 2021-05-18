@@ -1,0 +1,59 @@
+.app-filter {
+    position: relative;
+    > input {
+        background-color: $clr-body;
+        border: 1px solid $clr-border;
+        border-radius: 3px;
+        width: 215px;
+        height: 28px;
+        padding-inline-start: 12%;
+        outline: none;
+        &:focus,
+        &:active,
+        &.active {
+            + div {
+                left: 18%;
+            }
+            ~ button {
+                display: block;
+            }
+        }
+    }
+    > div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: left 0.1s;
+        display: flex;
+        align-items: center;
+        pointer-events: none;
+        cursor: text;
+        > span {
+            background-image: $sprites-url;
+            background-repeat: no-repeat;
+            background-position: -399px -321px;
+            height: 10px;
+            width: 10px;
+            display: inline-block;
+            margin-right: 6px;
+            vertical-align: baseline;
+        }
+        > p {
+            font-size: rem(14px);
+            color: $clr-muted-txt;
+            font-weight: 200;
+        }
+    }
+    > button {
+        position: absolute;
+        right: 5px;
+        top: 4px;
+        background-position: -318px -333px;
+        background-repeat: no-repeat;
+        height: 20px;
+        width: 20px;
+        display: none;
+        background-image: $sprites-url;
+    }
+}

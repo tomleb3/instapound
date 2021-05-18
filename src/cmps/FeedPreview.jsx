@@ -19,9 +19,21 @@ const _FeedPreview = ({ post, loggedInUser }) => {
         })()
     }, [post])
 
-    const onToggleLike = async () => {
+    const onToggleLike = () => myLike ? onRemoveLike() : onAddLike()
+
+    const onAddLike = async () => {
         try {
-            myLike ? await likeService.remove(myLike._id) : await likeService.add(post._id)
+            if (myLike) return
+            await likeService.add(post._id)
+            setLikes(await likeService.query(post))
+        } catch (err) {
+            // SNACKBAR DOCKED TO BOTTOM
+        }
+    }
+    const onRemoveLike = async () => {
+        try {
+            if (!myLike) return
+            await likeService.remove(myLike._id)
             setLikes(await likeService.query(post))
         } catch (err) {
             // SNACKBAR DOCKED TO BOTTOM
@@ -81,7 +93,7 @@ const _FeedPreview = ({ post, loggedInUser }) => {
                 </button>
             </div>
         </header>
-        <img className="post-img" src={post.imgUrl} alt="" />
+        <img className="post-img" src={post.imgUrl} alt="" onDoubleClick={onAddLike} />
         <section className="social-container">
             <header className="flex j-between a-center">
                 <div>

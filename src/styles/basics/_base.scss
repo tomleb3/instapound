@@ -11,8 +11,10 @@
         background-color: $clr-body;
 
         button {
-            cursor: pointer;
+            background-color: transparent;
             outline: none;
+            border: none;
+            cursor: pointer;
         }
 
         a {

@@ -9,14 +9,9 @@ import { LoginSignup } from './pages/LoginSignup.jsx'
 import { UserProfile } from './pages/UserProfile.jsx'
 import { About } from './pages/About.jsx'
 import { AppHeader } from './cmps/AppHeader.jsx'
-import { loadSubscriptions } from './store/actions/subscriptionActions.js'
 import { AppFooter } from './cmps/AppFooter.jsx'
 
-const _App = ({ loadSubscriptions, loggedInUser }) => {
-
-  useEffect(() => {
-    // (async () => await loadSubscriptions())()
-  }, [])
+const _App = ({ loggedInUser }) => {
 
   return (
     <main className="App" role="main">
@@ -31,26 +26,22 @@ const _App = ({ loadSubscriptions, loggedInUser }) => {
               <AppFooter />
             </Fragment>} />
             <Route path="/direct/" component={Direct} />
-            <Route path="/:username/tagged/"
-              render={() => <Fragment>
-                <UserProfile currTab="tagged" />
-                <AppFooter />
-              </Fragment>} />
-            <Route path="/:username/saved/"
-              render={() => <Fragment>
-                <UserProfile currTab="saved" />
-                <AppFooter />
-              </Fragment>} />
-            <Route path="/:username/channel/"
-              render={() => <Fragment>
-                <UserProfile currTab="channel" />
-                <AppFooter />
-              </Fragment>} />
-            <Route path="/:username/"
-              render={() => <Fragment>
-                <UserProfile currTab="posts" />
-                <AppFooter />
-              </Fragment>} />
+            <Route path="/:username/tagged/" render={() => <Fragment>
+              <UserProfile currTab="tagged" />
+              <AppFooter />
+            </Fragment>} />
+            <Route path="/:username/saved/" render={() => <Fragment>
+              <UserProfile currTab="saved" />
+              <AppFooter />
+            </Fragment>} />
+            <Route path="/:username/channel/" render={() => <Fragment>
+              <UserProfile currTab="channel" />
+              <AppFooter />
+            </Fragment>} />
+            <Route path="/:username/" render={() => <Fragment>
+              <UserProfile currTab="posts" />
+              <AppFooter />
+            </Fragment>} />
             <Route path="/" component={Home} />
           </Switch>
         </Fragment>}
@@ -63,7 +54,4 @@ const mapStateToProps = state => {
     loggedInUser: state.userModule.loggedInUser
   }
 }
-const mapDispatchToProps = {
-  loadSubscriptions,
-}
-export const App = connect(mapStateToProps, mapDispatchToProps)(_App)
+export const App = connect(mapStateToProps)(_App)

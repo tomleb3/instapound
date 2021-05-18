@@ -1,5 +1,3 @@
-$sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/instapound/ig-sprites_yaw4wf.png);
-
 .login-signup {
     height: 100vh;
     overflow: hidden;
@@ -232,7 +230,7 @@ $sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/in
                     pointer-events: none;
                     cursor: default;
                     &.active {
-                        background-color: #0095f6;
+                        background-color: $clr-active-link;
                         pointer-events: auto;
                         cursor: pointer;
                     }
@@ -266,7 +264,7 @@ $sprites-url: url(https://res.cloudinary.com/tomleb3/image/upload/v1615639449/in
                 p {
                     font-size: 0.875em;
                     a {
-                        color: #0095f6;
+                        color: $clr-active-link;
                         font-weight: 600;
                     }
                 }
