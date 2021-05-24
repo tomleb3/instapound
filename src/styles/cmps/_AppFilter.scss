@@ -1,59 +1,122 @@
-.app-filter {
+.filter-container {
     position: relative;
-    > input {
-        background-color: $clr-body;
-        border: 1px solid $clr-border;
-        border-radius: 3px;
-        width: 215px;
-        height: 28px;
-        padding-inline-start: 12%;
-        outline: none;
-        &:focus,
-        &:active,
-        &.active {
-            + div {
-                left: 18%;
-            }
-            ~ button {
-                display: block;
+    z-index: 1;
+    .app-filter {
+        position: relative;
+        > input {
+            background-color: $clr-body;
+            border: 1px solid $clr-border;
+            border-radius: 3px;
+            width: 215px;
+            height: 28px;
+            padding-inline-start: 12%;
+            outline: none;
+            &:focus,
+            &:active,
+            &.active {
+                + div {
+                    left: 18%;
+                }
+                ~ button {
+                    display: block;
+                }
             }
         }
-    }
-    > div {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        transition: left 0.1s;
-        display: flex;
-        align-items: center;
-        pointer-events: none;
-        cursor: text;
-        > span {
-            background-image: $sprites-url;
+        > div {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: left 0.1s;
+            display: flex;
+            align-items: center;
+            pointer-events: none;
+            cursor: text;
+            > span {
+                background-image: $sprites-url;
+                background-repeat: no-repeat;
+                background-position: -399px -321px;
+                height: 10px;
+                width: 10px;
+                display: inline-block;
+                margin-right: 6px;
+                vertical-align: baseline;
+            }
+            > p {
+                font-size: rem(14px);
+                color: $clr-muted-txt;
+                font-weight: 200;
+            }
+        }
+        > button {
+            position: absolute;
+            right: 5px;
+            top: 4px;
+            background-position: -318px -333px;
             background-repeat: no-repeat;
-            background-position: -399px -321px;
-            height: 10px;
-            width: 10px;
-            display: inline-block;
-            margin-right: 6px;
-            vertical-align: baseline;
-        }
-        > p {
-            font-size: rem(14px);
-            color: $clr-muted-txt;
-            font-weight: 200;
+            height: 20px;
+            width: 20px;
+            display: none;
+            background-image: $sprites-url;
         }
     }
-    > button {
+    .search-results {
+        width: 375px;
+        max-height: 362px;
+        border-radius: 6px;
         position: absolute;
-        right: 5px;
-        top: 4px;
-        background-position: -318px -333px;
-        background-repeat: no-repeat;
-        height: 20px;
-        width: 20px;
-        display: none;
-        background-image: $sprites-url;
+        margin-left: -80px;
+        .dialog-background {
+            bottom: 0;
+            left: 0;
+            position: fixed;
+            right: 0;
+            top: 0;
+            z-index: -1;
+        }
+        .dialog-arrow {
+            position: absolute;
+            left: 187.5px;
+            bottom: 0;
+            top: -6px;
+            width: 14px;
+            height: 14px;
+            transform: rotate(45deg);
+            background: white;
+            border: 1px solid white;
+            box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.0975);
+        }
+        > a {
+            display: block;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background-color: white;
+            &:hover {
+                background-color: $clr-body;
+            }
+            > img {
+                height: 44px;
+                width: 44px;
+                border-radius: 50%;
+                margin-inline-end: 12px;
+            }
+            > div > span {
+                margin-top: 2px;
+                font-size: rem(14px);
+                color: $clr-muted-txt;
+            }
+        }
+        .box-shadow {
+            border-radius: 20px;
+            bottom: 0;
+            height: 8px;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 100%);
+        }
     }
 }

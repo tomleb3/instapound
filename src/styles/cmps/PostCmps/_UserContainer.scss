@@ -1,0 +1,15 @@
+.user-container {
+    height: 60px;
+    padding: 1rem;
+    border-bottom: 1px solid $clr-border-light;
+    > img {
+        border-radius: 50%;
+        height: 2rem;
+        width: 2rem;
+        margin-inline-end: 0.875rem;
+        background-color: $clr-border;
+    }
+    > div {
+        width: 100%;
+    }
+}

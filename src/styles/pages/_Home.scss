@@ -1,5 +1,15 @@
 .home-page {
     padding-top: 30px;
+    @media (max-width: 1000px) {
+        > .left-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        > .right-panel {
+            display: none;
+        }
+    }
     > .right-panel {
         position: fixed;
         top: 88px;
@@ -14,6 +24,7 @@
                 height: 56px;
                 width: 56px;
                 margin-inline-end: 15px;
+                border-radius: 50%;
             }
             > div {
                 > a {
@@ -33,6 +44,20 @@
                     line-height: 14px;
                     color: $clr-active-link;
                 }
+            }
+        }
+        > .btn-upload {
+            width: 100%;
+            border-radius: 4px;
+            padding: 0;
+            border: 1px solid $clr-active-link;
+            > label {
+                display: block;
+                padding: 8px 0;
+                font-weight: 600;
+                height: 100%;
+                width: 100%;
+                cursor: pointer;
             }
         }
     }

@@ -1,0 +1,62 @@
+.user-posts {
+    > div {
+        display: flex;
+        margin-bottom: 28px;
+        > article {
+            flex: 1 0 0%;
+            &:not(:last-of-type) {
+                margin-right: 28px;
+            }
+            &:hover {
+                > a > div {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: absolute;
+                    top: 0;
+                    height: inherit;
+                    width: inherit;
+                    background: rgba(0, 0, 0, 0.3);
+                    > div {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        &:first-of-type {
+                            margin-inline-end: 30px;
+                            > span {
+                                background-position: -340px -333px;
+                            }
+                        }
+                        &:last-of-type {
+                            > span {
+                                background-position: -382px -333px;
+                            }
+                        }
+                        > span {
+                            background-image: $sprites-url;
+                            background-repeat: no-repeat;
+                            height: 19px;
+                            width: 19px;
+                            margin-inline-end: 7px;
+                        }
+                        > label {
+                            color: white;
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+            > a {
+                display: block;
+                height: 100%;
+                width: 100%;
+                position: relative;
+            }
+            .post-img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}

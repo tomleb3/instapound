@@ -3,17 +3,22 @@ import { httpService } from './httpService'
 export const postService = {
     getFeed,
     getUserPosts,
+    getById,
     add,
     edit,
     remove
 }
 
-function getFeed() {
-    return httpService.get('post')
+function getFeed(loggedInUserId) {
+    return httpService.get(`post/feed/${loggedInUserId}`)
 }
 
 function getUserPosts(username) {
-    return httpService.get(`post/${username}`)
+    return httpService.get(`post/by/${username}`)
+}
+
+function getById(postId) {
+    return httpService.get(`post/${postId}`)
 }
 
 function add(post) {

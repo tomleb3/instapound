@@ -1,0 +1,12 @@
+.time-container {
+    > time {
+        display: block;
+        font-size: rem(10px);
+        letter-spacing: 0.2px;
+        line-height: 18px;
+        padding: 0 1rem;
+        margin-bottom: 4px;
+        color: $clr-muted-txt;
+        text-transform: uppercase;
+    }
+}

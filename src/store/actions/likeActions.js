@@ -12,10 +12,11 @@ export function loadLikes(post) {
     }
 }
 
-export function addLike(like) {
+export function addLike(postId) {
+    console.log(postId)
     return async dispatch => {
         try {
-            const addedLike = await likeService.add(like)
+            const addedLike = await likeService.add(postId)
             dispatch({ type: 'ADD_LIKE', like: addedLike })
         } catch (err) {
             console.log('likeActions:', err)

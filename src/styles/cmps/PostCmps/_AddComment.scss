@@ -1,0 +1,30 @@
+.add-comment {
+    border-top: 1px solid $clr-border-light;
+    padding: 0 1rem;
+    margin-top: 4px;
+    font-size: rem(14px);
+    min-height: 56px;
+    button:first-of-type {
+        padding: 8px 16px 8px 0;
+    }
+    textarea {
+        height: 18px;
+        background: 0 0;
+        border: 0;
+        outline: 0;
+        padding: 0;
+        resize: none;
+        font-size: inherit;
+        flex: 1;
+    }
+    button:last-of-type {
+        font-weight: 600;
+        color: $clr-active-link;
+        background: 0 0;
+        user-select: none;
+        &.disabled {
+            pointer-events: none;
+            opacity: 0.3;
+        }
+    }
+}

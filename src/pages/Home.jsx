@@ -2,19 +2,23 @@ import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { AppFooter } from '../cmps/AppFooter'
+import { CloudinaryUploader } from '../cmps/CloudinaryUploader'
 import { FeedList } from '../cmps/FeedList'
 import { postService } from '../services/postService'
 
 const _Home = ({ loggedInUser }) => {
 
     const [posts, setPosts] = useState([])
+    document.title = 'Instapound'
 
     useEffect(() => {
-        (async () => setPosts(await postService.getFeed()))()
+        (async () => setPosts(await postService.getFeed(loggedInUser._id)))()
     }, [])
 
     return <main className="home-page main-layout">
-        <FeedList posts={posts} />
+        <article className="left-panel">
+            <FeedList posts={posts} feedView />
+        </article>
         <article className="right-panel">
             <div className="profile-container flex a-center">
                 <Link to={loggedInUser.username}>
@@ -30,6 +34,10 @@ const _Home = ({ loggedInUser }) => {
                     <span>Switch</span>
                 </button>
             </div>
+            <button className="btn-upload">
+                <label htmlFor="uploader-input">UPLOAD</label>
+            </button>
+            <CloudinaryUploader isPostMode />
             <AppFooter homePage />
         </article>
     </main>
@@ -37,7 +45,6 @@ const _Home = ({ loggedInUser }) => {
 
 const mapStateToProps = state => {
     return {
-        posts: state.postModule.posts,
         loggedInUser: state.userModule.loggedInUser
     }
 }

@@ -1,12 +1,13 @@
-import { FeedPreview } from './FeedPreview.jsx'
+import { PostPreview } from "./PostPreview"
 
-export const FeedList = ({ posts }) => {
+export const FeedList = ({ posts, feedView }) => {
 
     if (!posts || !posts.length) return <div></div>
 
-    return <section className="feed-list">
+    return <div className="feed-list">
         {posts.map(post => {
-            return <FeedPreview key={post._id} post={post} />
+            return <PostPreview post={post}
+                feedView={feedView} key={post._id} />
         })}
-    </section>
+    </div>
 }

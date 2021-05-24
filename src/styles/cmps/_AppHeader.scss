@@ -8,18 +8,21 @@
     right: 0;
     left: 0;
 
-    section {
+    > section {
         height: inherit;
-        .logo {
+        > .logo {
             font-size: 1.6em;
             font-family: instapound;
         }
-        nav {
+        > nav > a {
             img {
                 height: 22px;
                 width: 22px;
             }
-            *:not(:last-child) {
+            &:nth-child(-n+3):active {
+                opacity: 0.5;
+            }
+            &:not(:last-child) {
                 margin-inline-end: 1.5rem;
             }
         }

@@ -34,25 +34,24 @@ function timeSince(date, locale = "en-US") {
     const month = date.getMonth()
 
     const options = { year: 'numeric', month: 'long', day: 'numeric' }
+    if (year !== currYear) return new Date(date).toLocaleDateString(locale, options)
+    const seconds = Math.floor((new Date() - date) / 1000)
 
-    if (year !== currYear) return new Date(date).toLocaleDateString(locale, options); 
+    let interval = seconds / 31536000
+    if (interval > 1) return new Date(date).toLocaleDateString(locale, options);
 
-    // const seconds = Math.floor((new Date() - date) / 1000)
+    interval = seconds / 86400
+    const days = Math.floor(interval)
+    if (interval > 1) return days + `${days === 1 ? ' day' : ' days'} ago`
 
-    // let interval = seconds / 31536000
-    // if (interval > 1) return new Date(date).toLocaleDateString(locale, options);
+    interval = seconds / 3600
+    const hours = Math.floor(interval)
+    if (interval > 1) return hours + `${hours === 1 ? ' hour' : ' hours'} ago`
 
-    // interval = seconds / 2592000
-    // if (interval > 1) return Math.floor(interval) + " months"
+    interval = seconds / 60
+    const minutes = Math.floor(interval)
+    if (interval > 1) return minutes + `${minutes === 1 ? ' minute' : ' minutes'} ago`
 
-    // interval = seconds / 86400
-    // if (interval > 1) return Math.floor(interval) + " days"
-
-    // interval = seconds / 3600
-    // if (interval > 1) return Math.floor(interval) + " hours"
-
-    // interval = seconds / 60
-    // if (interval > 1) return Math.floor(interval) + " minutes"
-
-    // return Math.floor(seconds) + " seconds"
+    const secs = Math.floor(seconds)
+    return secs + `${secs === 1 ? ' second' : ' seconds'} ago`
 }

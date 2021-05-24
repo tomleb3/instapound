@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react'
+import { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
 import { Home } from './pages/Home.jsx'
@@ -10,6 +10,8 @@ import { UserProfile } from './pages/UserProfile.jsx'
 import { About } from './pages/About.jsx'
 import { AppHeader } from './cmps/AppHeader.jsx'
 import { AppFooter } from './cmps/AppFooter.jsx'
+import { CreatePost } from './pages/CreatePost.jsx'
+import { PostDetails } from './pages/PostDetails.jsx'
 
 const _App = ({ loggedInUser }) => {
 
@@ -19,6 +21,11 @@ const _App = ({ loggedInUser }) => {
         <Fragment>
           <AppHeader />
           <Switch>
+            <Route path="/p/:id" render={() => <Fragment>
+              <PostDetails />
+              <AppFooter />
+            </Fragment>} />
+            <Route path="/create/" component={CreatePost} />
             <Route path="/about/" component={About} />
             <Route path="/activity/" component={Activity} />
             <Route path="/explore/" render={() => <Fragment>
@@ -42,11 +49,11 @@ const _App = ({ loggedInUser }) => {
               <UserProfile currTab="posts" />
               <AppFooter />
             </Fragment>} />
-            <Route path="/" component={Home} />
+            <Route path="/" exact component={Home} />
           </Switch>
         </Fragment>}
     </main >
-  );
+  )
 }
 
 const mapStateToProps = state => {
