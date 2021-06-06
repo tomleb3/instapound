@@ -1,8 +1,29 @@
-.post-details {
-    padding: 4vh 0;
-    .post-panel {
-        background-color: $clr-body;
-    }
-    .other-posts-panel {
+.post-details-container {
+    padding: 4vh 20px 0;
+    .post-details {
+        .post-panel {
+            background-color: $clr-body;
+        }
+        .other-posts-panel {
+            border-top: 1px solid $clr-border;
+            margin-top: 48px;
+            padding-top: 6vh;
+            > span {
+                color: $clr-muted-txt;
+                font-size: rem(14px);
+                font-weight: 600;
+                display: block;
+                margin-bottom: 20px;
+                > a {
+                    color: $clr-txt;
+                }
+            }
+        }
+        @media (max-width: $breakpoint-no3) {
+            padding: 4vh 0;
+            .other-posts-panel {
+                margin: 0 10px;
+            }
+        }
     }
 }

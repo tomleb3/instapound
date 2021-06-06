@@ -1,6 +1,7 @@
 .home-page {
+    width: 100%;
     padding-top: 30px;
-    @media (max-width: 1000px) {
+    @media (max-width: 999px) {
         > .left-panel {
             display: flex;
             flex-direction: column;
@@ -13,7 +14,7 @@
     > .right-panel {
         position: fixed;
         top: 88px;
-        left: 63.5%;
+        left: 666px;
         height: 100vh;
         max-width: 293px;
         > .profile-container {
@@ -50,13 +51,12 @@
             width: 100%;
             border-radius: 4px;
             padding: 0;
-            border: 1px solid $clr-active-link;
+            background-color: $clr-border;
             > label {
                 display: block;
                 padding: 8px 0;
                 font-weight: 600;
-                height: 100%;
-                width: 100%;
+                width: inherit;
                 cursor: pointer;
             }
         }

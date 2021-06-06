@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { createContext, Fragment, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
 import { Home } from './pages/Home.jsx'
@@ -12,47 +12,61 @@ import { AppHeader } from './cmps/AppHeader.jsx'
 import { AppFooter } from './cmps/AppFooter.jsx'
 import { CreatePost } from './pages/CreatePost.jsx'
 import { PostDetails } from './pages/PostDetails.jsx'
+import { MobileDock } from './cmps/MobileDock.jsx'
+import { isMobileOnly } from 'react-device-detect'
+
+export const WindowDataContext = createContext(null)
 
 const _App = ({ loggedInUser }) => {
 
+  const [windowData, setWindowData] = useState({
+    windowHeight: window.innerHeight,
+    windowWidth: window.innerWidth
+  })
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  const handleResize = () => {
+    setWindowData({
+      windowHeight: window.innerHeight,
+      windowWidth: window.innerWidth
+    })
+  }
+
   return (
-    <main className="App" role="main">
-      {!loggedInUser ? <LoginSignup /> :
-        <Fragment>
-          <AppHeader />
-          <Switch>
-            <Route path="/p/:id" render={() => <Fragment>
-              <PostDetails />
-              <AppFooter />
-            </Fragment>} />
-            <Route path="/create/" component={CreatePost} />
-            <Route path="/about/" component={About} />
-            <Route path="/activity/" component={Activity} />
-            <Route path="/explore/" render={() => <Fragment>
-              <Explore />
-              <AppFooter />
-            </Fragment>} />
-            <Route path="/direct/" component={Direct} />
-            <Route path="/:username/tagged/" render={() => <Fragment>
-              <UserProfile currTab="tagged" />
-              <AppFooter />
-            </Fragment>} />
-            <Route path="/:username/saved/" render={() => <Fragment>
-              <UserProfile currTab="saved" />
-              <AppFooter />
-            </Fragment>} />
-            <Route path="/:username/channel/" render={() => <Fragment>
-              <UserProfile currTab="channel" />
-              <AppFooter />
-            </Fragment>} />
-            <Route path="/:username/" render={() => <Fragment>
-              <UserProfile currTab="posts" />
-              <AppFooter />
-            </Fragment>} />
-            <Route path="/" exact component={Home} />
-          </Switch>
-        </Fragment>}
-    </main >
+    <main className="App flex col full-height" role="main">
+      <WindowDataContext.Provider value={{ windowData }}>
+        {!loggedInUser ? <LoginSignup /> :
+          <Fragment>
+            <AppHeader />
+            <Switch>
+              <Route path="/p/:id" render={() => <Fragment>
+                <PostDetails />
+                <AppFooter />
+              </Fragment>} />
+              <Route path="/about/" component={About} />
+              <Route path="/activity/" component={Activity} />
+              <Route path="/explore/" render={() => <Fragment>
+                <Explore />
+                <AppFooter />
+              </Fragment>} />
+              <Route path="/direct/" component={Direct} />
+              <Route path="/create/:currTab/" component={CreatePost} />
+              <Route path="/:username/:currTab?/" render={() => <Fragment>
+                <UserProfile />
+                <AppFooter />
+              </Fragment>} />
+              <Route path="/" exact component={Home} />
+            </Switch>
+            {isMobileOnly && <MobileDock />}
+          </Fragment>}
+      </WindowDataContext.Provider>
+    </main>
   )
 }
 

@@ -14,17 +14,16 @@
 @import "./pages/UserProfile";
 @import "./pages/LoginSignup";
 @import "./pages/CreatePost";
+@import "./pages/PageUnavailable";
 @import "./pages/PostDetails";
+@import "./pages/EditProfile";
 
 @import "./cmps/AppHeader";
 @import "./cmps/AppFooter";
 @import "./cmps/AppFilter";
+@import "./cmps/CommentRender";
+@import "./cmps/ImgCropper";
+@import "./cmps/MobileDock";
 @import "./cmps/PostPreview";
 @import "./cmps/UserPosts";
-
-@import "./cmps/PostCmps/ActionBtns";
-@import "./cmps/PostCmps/AddComment";
-@import "./cmps/PostCmps/CommentRender";
-@import "./cmps/PostCmps/LikeRender";
-@import "./cmps/PostCmps/TimeContainer";
-@import "./cmps/PostCmps/UserContainer";
+@import "./cmps/UserSuggestions";

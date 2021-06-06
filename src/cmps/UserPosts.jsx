@@ -3,18 +3,19 @@ import { Link } from 'react-router-dom'
 import { postService } from '../services/postService'
 import { utilService } from '../services/utilService'
 
-export const UserPosts = ({ username }) => {
+export const UserPosts = ({ username, withoutPostId }) => {
 
     const [posts, setPosts] = useState([])
     const { makeId } = utilService
 
-    useEffect(() =>
+    useEffect(() => {
         (async () =>
             setPosts(await postService.getUserPosts(username)))()
-        , [])
+    }, [username])
 
     const postRows = () => {
         let _posts = JSON.parse(JSON.stringify(posts))
+        if (withoutPostId) _posts = _posts.filter(post => post._id !== withoutPostId)
         while (_posts.length % 3 !== 0) _posts.push({})
         return _posts.reduce((rows, post, idx) => {
             return (idx % 3 === 0 ? rows.push([post])

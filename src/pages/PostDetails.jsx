@@ -1,37 +1,42 @@
 import { useEffect, useState } from "react"
 import { useLocation, useParams } from "react-router"
+import { Link } from "react-router-dom"
 import { PostPreview } from "../cmps/PostPreview"
+import { UserPosts } from "../cmps/UserPosts"
 import { postService } from '../services/postService'
 
 export const PostDetails = () => {
 
     const postId = useParams().id
     const [post, setPost] = useState(useLocation().post)
-    const postExists = post && Object.keys(post).length
+    const postExists = post && !!Object.keys(post).length
 
     useEffect(() => {
-        if (!postExists)
-            (async () => setPost(await postService.getById(postId)))()
-    }, [])
+        (async () =>
+            setPost(await postService.getById(postId)))()
+    }, [postId])
 
     useEffect(() => {
         if (!postExists) return
         const { fullname } = post.byUser
         document.title = post.txt ? `${fullname} on Instapound: "${post.txt}"`
             : `Instapound photo by ${fullname} \u2022 ${dateTimeSyntax}`
-    })
+    }, [post])
 
     const dateTimeSyntax = postExists &&
         `${new Date(post.createdAt).toLocaleDateString('en-US', { dateStyle: 'long' })}
         at ${new Date(post.createdAt).toLocaleTimeString('en-US', { timeStyle: 'short' })}`
 
     if (!postExists) return <div></div>
-    return <main className="post-details main-layout">
-        <div className="post-panel">
-            <PostPreview post={post} />
-        </div>
-        <div className="other-posts-panel">
-
-        </div>
-    </main>
+    return <section className="post-details-container">
+        <main className="post-details main-layout">
+            <div className="post-panel">
+                <PostPreview post={post} />
+            </div>
+            <div className="other-posts-panel">
+                <span>More posts from <Link to={`/${post.byUser.username}/`}>{post.byUser.username}</Link></span>
+                <UserPosts username={post.byUser.username} withoutPostId={postId} />
+            </div>
+        </main>
+    </section>
 }

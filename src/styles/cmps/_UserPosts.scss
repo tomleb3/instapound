@@ -2,10 +2,11 @@
     > div {
         display: flex;
         margin-bottom: 28px;
+        width: 100%;
         > article {
             flex: 1 0 0%;
             &:not(:last-of-type) {
-                margin-right: 28px;
+                margin-inline-end: 28px;
             }
             &:hover {
                 > a > div {
@@ -56,6 +57,15 @@
                 height: 100%;
                 width: 100%;
                 object-fit: cover;
+            }
+        }
+    }
+
+    @media (max-width: $breakpoint-no3) {
+        > div {
+            margin-bottom: 3px;
+            > article:not(:last-of-type) {
+                margin-inline-end: 3px;
             }
         }
     }

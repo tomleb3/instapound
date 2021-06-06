@@ -2,12 +2,12 @@
     height: $header-height;
     background-color: white;
     border-bottom: 1px solid $clr-border;
+    padding: 0 20px;
     position: fixed;
-    z-index: 10;
     top: 0;
     right: 0;
     left: 0;
-
+    z-index: 10;
     > section {
         height: inherit;
         > .logo {
@@ -15,16 +15,32 @@
             font-family: instapound;
         }
         > nav > a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             img {
                 height: 22px;
                 width: 22px;
+                border-radius: 50%;
             }
-            &:nth-child(-n+3):active {
+            .img-border {
+                border: 1px solid $clr-txt;
+                border-radius: 50%;
+                height: 28px;
+                width: 28px;
+                position: absolute;
+            }
+            &:nth-child(-n + 3):active {
                 opacity: 0.5;
             }
             &:not(:last-child) {
                 margin-inline-end: 1.5rem;
             }
+        }
+    }
+    @media (max-width: 599px) {
+        .filter-container {
+            display: none;
         }
     }
 }

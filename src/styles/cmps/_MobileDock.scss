@@ -1,0 +1,48 @@
+.mobile-dock {
+    height: 44px;
+    left: 0;
+    position: fixed;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    z-index: 10;
+    &::before {
+        content: "";
+        height: 1px;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: -1px;
+        background-color: $clr-border;
+    }
+    > nav {
+        height: 100%;
+        > div {
+            height: 100%;
+            > a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                width: 100%;
+                -webkit-tap-highlight-color: transparent;
+                img {
+                    height: 24px;
+                    width: 24px;
+                    border-radius: 50%;
+                }
+                .img-border {
+                    border: 1px solid $clr-txt;
+                    border-radius: 50%;
+                    height: 30px;
+                    width: 30px;
+                    position: absolute;
+                }
+            }
+            > button {
+                line-height: 0;
+            }
+        }
+    }
+}

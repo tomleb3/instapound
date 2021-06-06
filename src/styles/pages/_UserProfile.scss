@@ -1,107 +1,153 @@
-.user-profile {
-    @media (min-width: 736px) {
-        padding: 30px 20px 0;
-    }
-    > header {
-        margin-bottom: 44px;
-        .user-img-container {
-            flex-basis: 0;
-            margin-right: 30px;
-            @media (max-width: 735px) {
-                height: 77px;
-                width: 77px;
+.user-profile-container {
+    padding: 30px 20px 0;
+    .user-profile {
+        > header {
+            margin-bottom: 44px;
+            .user-img-container {
+                flex-basis: 0;
+                margin-right: 30px;
+                .user-img {
+                    height: 150px;
+                    width: 150px;
+                    border-radius: 50%;
+                }
+                .user-img,
+                span {
+                    margin-left: auto;
+                    margin-right: auto;
+                    display: block;
+                }
             }
-            .user-img {
-                height: 150px;
-                width: 150px;
-                border-radius: 50%;
-            }
-            .user-img,
-            span {
-                margin-left: auto;
-                margin-right: auto;
+            .user-info-container,
+            > span {
+                flex-basis: 30px;
+                flex-grow: 2;
                 display: block;
-            }
-        }
-        .user-info-container,
-        > span {
-            flex-basis: 30px;
-            flex-grow: 2;
-            display: block;
-            .react-loading-skeleton {
-                height: 100%;
-            }
-        }
-        .user-info-container {
-            > header {
-                margin-bottom: 20px;
-                > label {
-                    font-size: rem(28px);
-                    font-weight: 300;
-                }
-                > a {
-                    border: 1px solid #dbdbdb;
-                    background-color: transparent;
-                    border-radius: 4px;
-                    padding: 5px 9px;
-                    font-weight: 600;
-                    font-size: rem(14px);
-                    margin-left: 20px;
-                    margin-right: 5px;
-                }
-                > div {
-                    padding: 8px;
+                .react-loading-skeleton {
+                    height: 100%;
                 }
             }
-            > main {
-                margin-bottom: 20px;
-                label {
-                    &:not(:last-of-type) {
-                        margin-right: 40px;
+            .user-info-container {
+                > header {
+                    margin-bottom: 20px;
+                    > label {
+                        font-size: rem(28px);
+                        font-weight: 300;
                     }
-                    span {
+                    .action-btns-container {
+                        margin-left: 20px;
+                        > a,
+                        > button {
+                            border: 1px solid #dbdbdb;
+                            background-color: transparent;
+                            border-radius: 4px;
+                            padding: 5px 9px;
+                            font-weight: 600;
+                            font-size: rem(14px);
+                        }
+                        > button {
+                            &.btn-follow {
+                                background-color: $clr-active-link;
+                                color: white;
+                            }
+                            &.btn-unfollow {
+                                height: 30px;
+                                margin: 0 8px;
+                                > span {
+                                    background-image: $sprites2-url;
+                                    background-position: -522px -196px;
+                                    background-repeat: no-repeat;
+                                    display: block;
+                                    height: 12px;
+                                    width: 24px;
+                                }
+                            }
+                            &.btn-suggestions {
+                                transform: rotate(180deg);
+                                width: 34px;
+                                &.suggestions-open {
+                                    transform: rotate(0deg);
+                                    opacity: 0.7;
+                                }
+                            }
+                        }
+                    }
+                    .btn-options-container {
+                        padding: 8px;
+                        margin-left: 5px;
+                        > button.btn-options {
+                        }
+                    }
+                }
+                > main {
+                    margin-bottom: 20px;
+                    label {
+                        &:not(:last-of-type) {
+                            margin-right: 40px;
+                        }
+                        span {
+                            font-weight: 600;
+                        }
+                    }
+                }
+                > footer {
+                    line-height: 24px;
+                    word-wrap: break-word;
+                    h1 {
+                        font-size: rem(16px);
                         font-weight: 600;
                     }
                 }
             }
-            > footer {
-                line-height: 24px;
-                word-wrap: break-word;
-                h1 {
-                    font-size: rem(16px);
-                    font-weight: 600;
+        }
+        > main {
+            .tab-switch-container {
+                border-top: 1px solid $clr-border;
+                font-size: rem(12px);
+                font-weight: 600;
+                > a {
+                    height: 52px;
+                    > label {
+                        margin-left: 6px;
+                        letter-spacing: 1px;
+                        color: $clr-muted-txt;
+                        cursor: pointer;
+                    }
+                    &:active {
+                        opacity: 0.5;
+                    }
+                    &.active-tab {
+                        border-top: 1px solid $clr-txt;
+                        margin-top: -1px;
+                        > svg {
+                            fill: $clr-txt;
+                        }
+                        > label {
+                            color: $clr-txt;
+                        }
+                    }
+                    &:not(:last-of-type) {
+                        margin-right: 60px;
+                    }
                 }
             }
         }
-    }
-    > main {
-        .tab-switch-container {
-            border-top: 1px solid $clr-border;
-            font-size: rem(12px);
-            font-weight: 600;
-            > a {
-                height: 52px;
-                > label {
-                    margin-left: 6px;
-                    letter-spacing: 1px;
-                    color: $clr-muted-txt;
-                    cursor: pointer;
-                }
-                &:active {
-                    opacity: 0.5;
-                }
-                &.active-tab {
-                    border-top: 1px solid $clr-txt;
-                    margin-top: -1px;
-                    > svg {
-                        fill: $clr-txt;
+        @media (min-width: $breakpoint-no3) {
+            .user-info-container button.btn-unfollow {
+                padding: 0 24px;
+            }
+        }
+        @media (max-width: $breakpoint-no3) {
+            padding: unset;
+            > header {
+                .user-img-container {
+                    flex: unset;
+                    flex-basis: unset;
+                    margin: 16px 16px 24px;
+                    .user-img {
+                        height: 77px;
+                        width: 77px;
                     }
-                    > label {
-                        color: $clr-txt;
-                    }
-                }
-                &:not(:last-of-type) {
-                    margin-right: 60px;
                 }
             }
         }

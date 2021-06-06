@@ -12,18 +12,25 @@
 .comment-section-container {
     padding: 12px 16px;
     height: calc(100% - 32px);
+    width: calc(100% - 8px);
     > .comment-section {
         padding: 12px 0;
         font-size: rem(14px);
         a {
             font-weight: 600;
         }
+        ul > li:not(:last-of-type) {
+            padding-bottom: 12px;
+        }
+        .user-post-txt-container {
+            padding-bottom: 12px;
+        }
         time {
             font-size: rem(12px);
             color: $clr-muted-txt;
             font-weight: 400;
             line-height: 14px;
-            margin-top: 16px;
+            margin-top: 14px;
             margin-bottom: 4px;
         }
         .commentor-img {

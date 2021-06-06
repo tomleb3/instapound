@@ -9,10 +9,12 @@ const _AppHeader = ({ loggedInUser }) => {
     return <header className="app-header">
         <section className="main-layout flex j-between a-center">
             <div className="logo"><NavLink to="/" exact={true} replace>Instapound</NavLink></div>
-            <AppFilter />
-            <nav>
-                <NavLink to="/" exact={true} activeClassName="active-link" replace>
-                    <svg aria-label="Home" className="_8-yf5 " fill="#262626" height="22" viewBox="0 0 48 48" width="22">
+            <div className="filter-container">
+                <AppFilter />
+            </div>
+            <nav className="flex a-center">
+                <NavLink to="/" exact={true} replace>
+                    <svg aria-label="Home" fill="#262626" height="22" viewBox="0 0 48 48" width="22">
                         {currPage === '/' ? <path d="M 45.5 48 H 30.1 c -0.8 0 -1.5 -0.7 -1.5 -1.5 V 34.2 c 0 -2.6 -2.1 -4.6 -4.6 -4.6 s
                       -4.6 2.1 -4.6 4.6 v 12.3 c 0 0.8 -0.7 1.5 -1.5 1.5 H 2.5 c -0.8 0 -1.5 -0.7 -1.5 -1.5 V 23
                        c 0 -0.4 0.2 -0.8 0.4 -1.1 L 22.9 0.4 c 0.6 -0.6 1.6 -0.6 2.1 0 l 21.5 21.5 c 0.3 0.3 0.4
@@ -24,7 +26,7 @@ const _AppHeader = ({ loggedInUser }) => {
                     </svg>
                 </NavLink>
                 <NavLink to="/direct/">
-                    <svg aria-label="Messenger" className="_8-yf5 " fill="#262626" height="22" viewBox="0 0 48 48" width="22">
+                    <svg aria-label="Messenger" fill="#262626" height="22" viewBox="0 0 48 48" width="22">
                         {currPage === '/direct/' ? <path clipRule="evenodd" d="M10.2 29.8c-.7 1 .6 2.2 1.6 1.5l7.3-5.5c.5-.4 1.2-.4 1.7 0l5.4 4c1.6
                              1.2 3.9.8 5-.9L38 18.2c.7-1-.6-2.2-1.6-1.5L29 22.2c-.5.4-1.2.4-1.7 0l-5.4-4c-1.6-1.2-3.9-.8-5
                               .9l-6.7 10.7zM24 1c13 0 23 9.5 23 22.3S37 45.6 24 45.6c-2.3 0-4.6-.3-6.7-.9-.4-.1-.8-.1-1.2.1l-4.6
@@ -37,8 +39,8 @@ const _AppHeader = ({ loggedInUser }) => {
                                     34 4 28.9 4 23.3 4 12.3 12.6 4 24 4s20 8.3 20 19.3-8.6 19.3-20 19.3z"></path>}
                     </svg>
                 </NavLink>
-                <NavLink to="/explore/" activeClassName="active-link" replace>
-                    <svg aria-label="Find People" className="_8-yf5 " fill="#262626" height="22" viewBox="0 0 48 48" width="22">
+                <NavLink to="/explore/" replace>
+                    <svg aria-label="Find People" fill="#262626" height="22" viewBox="0 0 48 48" width="22">
                         {currPage === '/explore/' ? <path clipRule="evenodd" d="M24 0C10.8 0 0 10.8 0 24s10.8 24 24 24 24-10.8
                          24-24S37.2 0 24 0zm12.2 13.8l-7 14.8c-.1.3-.4.6-.7.7l-14.8 7c-.2.1-.4.1-.6.1-.4
                           0-.8-.2-1.1-.4-.4-.4-.6-1.1-.3-1.7l7-14.8c.1-.3.4-.6.7-.7l14.8-7c.6-.3 1.3-.2
@@ -50,8 +52,8 @@ const _AppHeader = ({ loggedInUser }) => {
                              15l-5.5-5.5 10.5-5-5 10.5z" fillRule="evenodd"></path>}
                     </svg>
                 </NavLink>
-                <NavLink to="/activity/" activeClassName="active-link" replace>
-                    <svg aria-label="Activity Feed" className="_8-yf5 " fill="#262626" height="22" viewBox="0 0 48 48" width="22">
+                <NavLink to="/activity/" replace>
+                    <svg aria-label="Activity Feed" fill="#262626" height="22" viewBox="0 0 48 48" width="22">
                         {currPage === '/activity/' ? <path d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6
                          0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2
                           1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path>
@@ -64,8 +66,9 @@ const _AppHeader = ({ loggedInUser }) => {
                                1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path>}
                     </svg>
                 </NavLink>
-                <NavLink to={`/${loggedInUser.username}/`}>
-                    <img src={loggedInUser.imgUrl} alt="" />
+                <NavLink className="flex a-center j-center" to={`/${loggedInUser.username}/`}>
+                {currPage === `/${loggedInUser.username}/` && <div className="img-border"></div>}
+                    <img src={loggedInUser.imgUrl} alt={`${loggedInUser.username}'s profile picture`} />
                 </NavLink>
             </nav>
         </section>

@@ -1,5 +1,8 @@
 .create-post {
-    > .content-container {
+    > .style-container {
+        
+    }
+    > .details-container {
         padding: 16px 0;
         background-color: white;
         border-bottom: 1px solid #dbdbdb;
@@ -43,7 +46,7 @@
             color: $clr-active-link;
             margin-inline-start: auto;
         }
-        @media (max-width: $mobile-breakpoint) {
+        @media (max-width: $breakpoint-no1) {
             padding: 16px;
             > textarea {
                 width: 100%;

@@ -48,7 +48,24 @@
                 font-weight: 200;
             }
         }
-        > button {
+        .load-spinner {
+            height: 18px;
+            width: 18px;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            animation: loader-anim .8s steps(8) infinite;
+
+            @keyframes loader-anim {
+                0% {
+                    transform: rotate(180deg);
+                }
+                100% {
+                    transform: rotate(540deg);
+                }
+            }
+        }
+        .btn-clear {
             position: absolute;
             right: 5px;
             top: 4px;
@@ -62,8 +79,10 @@
     }
     .search-results {
         width: 375px;
-        max-height: 362px;
+        height: 362px;
         border-radius: 6px;
+        background: white;
+        padding: 12px 0 0 0;
         position: absolute;
         margin-left: -80px;
         .dialog-background {
@@ -82,7 +101,6 @@
             width: 14px;
             height: 14px;
             transform: rotate(45deg);
-            background: white;
             border: 1px solid white;
             box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.0975);
         }
@@ -117,6 +135,10 @@
             position: absolute;
             width: 100%;
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 100%);
+        }
+        .no-results {
+            color: $clr-muted-txt;
+            font-size: rem(14px);
         }
     }
 }

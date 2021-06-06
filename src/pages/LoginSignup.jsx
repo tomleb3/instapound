@@ -208,7 +208,7 @@ const _LoginSignup = ({ loggedInUser, login, signup, }) => {
             </div>
             <div className="with-facebook-container flex a-center">
                 <span></span>
-                <a href="https://www.google.com/">Log in with Facebook</a>
+                <Link href="/">Log in with Facebook</Link>
             </div>
             {userMsg.show && <p className="user-msg">{userMsg.txt}</p>}
             <a href="https://www.google.com/" className="forgot-pass">Forgot password?</a>
