@@ -10,7 +10,7 @@ import {
 
 const _LoginSignup = ({ loggedInUser, login, signup }) => {
 
-    const cloudinaryBaseUrl = process.env.REACT_APP_CLOUDINARY_BASE_URL
+    const CLOUDINARY_BASE_URL = process.env.REACT_APP_CLOUDINARY_BASE_URL
     const currPage = useLocation().pathname
     const [loginCred, setLoginCred] = useState({ username: '', password: '' })
     const [signupCred, setSignupCred] = useState({
@@ -224,11 +224,11 @@ const _LoginSignup = ({ loggedInUser, login, signup }) => {
         <section className="content-top flex grow">
             <article className="phones-img">
                 <div>
-                    <img src={`${cloudinaryBaseUrl}/loginSignup-page/phones-img5_wpcyae.jpg`} alt="" />
-                    <img src={`${cloudinaryBaseUrl}/loginSignup-page/phones-img4_qjacpo.jpg`} alt="" />
-                    <img src={`${cloudinaryBaseUrl}/loginSignup-page/phones-img3_o7xr3m.jpg`} alt="" />
-                    <img src={`${cloudinaryBaseUrl}/loginSignup-page/phones-img2_yo9eld.jpg`} alt="" />
-                    <img src={`${cloudinaryBaseUrl}/loginSignup-page/phones-img1_zlmfti.jpg`} alt="" />
+                    <img src={`${CLOUDINARY_BASE_URL}/loginSignup-page/phones-img5_wpcyae.jpg`} alt="" />
+                    <img src={`${CLOUDINARY_BASE_URL}/loginSignup-page/phones-img4_qjacpo.jpg`} alt="" />
+                    <img src={`${CLOUDINARY_BASE_URL}/loginSignup-page/phones-img3_o7xr3m.jpg`} alt="" />
+                    <img src={`${CLOUDINARY_BASE_URL}/loginSignup-page/phones-img2_yo9eld.jpg`} alt="" />
+                    <img src={`${CLOUDINARY_BASE_URL}/loginSignup-page/phones-img1_zlmfti.jpg`} alt="" />
                 </div>
             </article>
             <article className="right-panel flex col j-center a-center">
@@ -242,13 +242,13 @@ const _LoginSignup = ({ loggedInUser, login, signup }) => {
                 <div className="app-stores-container">
                     <a href="https://itunes.apple.com/app/instagram/id389801252?pt=428156&amp;ct=igweb.loginPage.badge&amp;mt=8&amp;vt=lo">
                         <img className="pointer" alt=""
-                            src={`${cloudinaryBaseUrl}/loginSignup-page/apple-appstore_iciokc.png`} />
+                            src={`${CLOUDINARY_BASE_URL}/loginSignup-page/apple-appstore_iciokc.png`} />
                     </a>
                     <a href="https://play.google.com/store/apps/details?id=com.instagram.android&amp;
                 referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3DF25EDB58
                 -AFC5-43F9-B6D3-EFB6C7309776%26utm_content%3Dlo%26utm_medium%3Dbadge">
                         <img className="pointer" alt=""
-                            src={`${cloudinaryBaseUrl}/loginSignup-page/android-googleplay_c0bp6g.png`} />
+                            src={`${CLOUDINARY_BASE_URL}/loginSignup-page/android-googleplay_c0bp6g.png`} />
                     </a>
                 </div>
             </article>

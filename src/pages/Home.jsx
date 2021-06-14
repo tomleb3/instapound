@@ -10,6 +10,7 @@ import { isMobileOnly } from 'react-device-detect'
 
 const _Home = ({ loggedInUser }) => {
 
+    const CLOUDINARY_BASE_URL = process.env.REACT_APP_CLOUDINARY_BASE_URL
     const [posts, setPosts] = useState([])
     let currPage = useLocation().pathname
     const { windowData } = useContext(WindowDataContext)
@@ -61,7 +62,13 @@ const _Home = ({ loggedInUser }) => {
         {isMobileOnly && mobileHeader}
 
         <article className="left-panel">
-            <FeedList posts={posts} feedView />
+            {posts && posts.length ? <FeedList posts={posts} feedView />
+                : <div className="blank-feed">
+                    <img src={`${CLOUDINARY_BASE_URL}/blank-feed_varqbm.svg`} alt="Blank Feed" />
+                    <span>Your feed is empty,</span>
+                    <span>Follow <Link to="/explore/">other users</Link> to fill it up.</span>
+                </div>
+            }
         </article>
         {windowWidth >= 1000 && <article className="right-panel">
             <div className="profile-container flex a-center">
