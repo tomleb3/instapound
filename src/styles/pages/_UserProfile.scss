@@ -1,6 +1,7 @@
 .user-profile-container {
     padding: 30px 20px 0;
     .user-profile {
+        width: 100%;
         > header {
             margin-bottom: 44px;
             .user-img-container {
@@ -60,6 +61,7 @@
                                     display: block;
                                     height: 12px;
                                     width: 24px;
+                                    pointer-events: none;
                                 }
                             }
                             &.btn-suggestions {
@@ -79,14 +81,11 @@
                         }
                     }
                 }
-                > main {
+                .user-stats-container {
                     margin-bottom: 20px;
-                    label {
+                    > div {
                         &:not(:last-of-type) {
                             margin-right: 40px;
-                        }
-                        span {
-                            font-weight: 600;
                         }
                     }
                 }
@@ -105,8 +104,9 @@
                 border-top: 1px solid $clr-border;
                 font-size: rem(12px);
                 font-weight: 600;
+                height: 52px;
                 > a {
-                    height: 52px;
+                    height: inherit;
                     > label {
                         margin-left: 6px;
                         letter-spacing: 1px;
@@ -132,13 +132,16 @@
                 }
             }
         }
-        @media (min-width: $breakpoint-no3) {
-            .user-info-container button.btn-unfollow {
-                padding: 0 24px;
-            }
+    }
+    @media (min-width: $breakpoint-no3) {
+        .user-info-container button.btn-unfollow {
+            padding: 0 24px;
         }
-        @media (max-width: $breakpoint-no3) {
-            padding: unset;
+    }
+    @media (max-width: $breakpoint-no3) {
+        padding: unset;
+        margin-top: 16px;
+        .user-profile {
             > header {
                 .user-img-container {
                     flex: unset;
@@ -148,6 +151,60 @@
                         height: 77px;
                         width: 77px;
                     }
+                }
+                .user-info-container {
+                    > header {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        .action-btns-container {
+                            margin-left: unset;
+                            .btn-message {
+                                width: 150px;
+                            }
+                        }
+                    }
+                }
+            }
+            .user-stats-container {
+                justify-content: space-around;
+                border-top: 1px solid $clr-border;
+                padding: 12px 0;
+                > div > label,
+                > div > label > a {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: rem(14px);
+                }
+            }
+            > main {
+                .tab-switch-container {
+                    height: 45px;
+                    border-bottom: 1px solid $clr-border;
+                    > a {
+                        margin-right: unset !important;
+                        justify-content: center;
+                        flex: 1 1 auto;
+                        &.active-tab {
+                            border-top: unset;
+                            margin-top: unset;
+                            > svg {
+                                fill: $clr-active-link;
+                            }
+                        }
+                        > label {
+                            display: none;
+                        }
+                        > svg {
+                            height: 24px;
+                            width: 24px;
+                        }
+                    }
+                }
+                .not-available {
+                    display: block;
+                    padding: 16px;
                 }
             }
         }

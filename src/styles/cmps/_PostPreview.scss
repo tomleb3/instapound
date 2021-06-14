@@ -113,6 +113,10 @@
     @media (min-width: $breakpoint-no2) {
         border: 1px solid $clr-border;
     }
+    @media (max-width: $breakpoint-no2) {
+        margin-top: 20px;
+        margin-bottom: 15px;
+    }
     @media (min-width: $breakpoint-no3) {
         &:not(.feed-view) {
             display: flex;
@@ -144,7 +148,6 @@
     }
     @media (max-width: $breakpoint-no3) {
         &:not(.feed-view) {
-            margin-top: 20px;
             border: unset;
             .post-img {
                 max-width: unset;

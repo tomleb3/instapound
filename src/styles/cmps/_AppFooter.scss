@@ -1,5 +1,4 @@
 .app-footer {
-    margin-bottom: 52px;
     color: $clr-muted-txt;
     font-size: rem(12px);
     .links-container {
@@ -32,6 +31,16 @@
                     margin: 0 0.25em 0 0.25em;
                 }
             }
+        }
+    }
+    &:not(.for-home-page) {
+        padding: 0 16px;
+        .links-container {
+            line-height: 8px;
+        }
+        .lang-copyright-container {
+            margin-top: 12px;
+            margin-bottom: 52px;
         }
     }
 }

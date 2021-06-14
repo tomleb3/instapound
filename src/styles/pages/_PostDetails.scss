@@ -19,11 +19,11 @@
                 }
             }
         }
-        @media (max-width: $breakpoint-no3) {
-            padding: 4vh 0;
-            .other-posts-panel {
-                margin: 0 10px;
-            }
+    }
+    @media (max-width: $breakpoint-no3) {
+        padding: 4vh 0;
+        .psot-details .other-posts-panel {
+            margin: 0 10px;
         }
     }
 }

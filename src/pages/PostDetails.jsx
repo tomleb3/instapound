@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useLocation, useParams } from "react-router"
 import { Link } from "react-router-dom"
 import { PostPreview } from "../cmps/PostPreview"
 import { UserPosts } from "../cmps/UserPosts"
 import { postService } from '../services/postService'
+import { WindowDataContext } from '../App'
 
 export const PostDetails = () => {
 
     const postId = useParams().id
     const [post, setPost] = useState(useLocation().post)
     const postExists = post && !!Object.keys(post).length
+    const { windowData } = useContext(WindowDataContext)
+    const { windowWidth } = windowData
 
     useEffect(() => {
         (async () =>
@@ -31,7 +34,7 @@ export const PostDetails = () => {
     return <section className="post-details-container">
         <main className="post-details main-layout">
             <div className="post-panel">
-                <PostPreview post={post} />
+                <PostPreview post={post} feedView={windowWidth < 735} />
             </div>
             <div className="other-posts-panel">
                 <span>More posts from <Link to={`/${post.byUser.username}/`}>{post.byUser.username}</Link></span>

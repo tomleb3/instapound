@@ -3,6 +3,8 @@ export const utilService = {
     getRandomInt,
     makeId,
     timeSince,
+    getBase64,
+    img64ToCanvasRef
 }
 
 function delay(ms = 1500) {
@@ -54,4 +56,37 @@ function timeSince(date, locale = "en-US") {
 
     const secs = Math.floor(seconds)
     return secs + `${secs === 1 ? ' second' : ' seconds'} ago`
+}
+
+function getBase64(file, cb) {
+    let reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => {
+        cb(reader.result)
+    }
+    reader.onerror = err => {
+        console.log('Error: ', err)
+    }
+}
+
+function img64ToCanvasRef(canvasRef, img64, pixelCrop) {
+    const canvas = canvasRef
+    canvas.width = pixelCrop.width
+    canvas.height = pixelCrop.height
+    const ctx = canvas.getContext('2d')
+    const img = new Image()
+    img.src = img64
+    img.onload = () => {
+        ctx.drawImage(
+            img,
+            pixelCrop.x,
+            pixelCrop.y,
+            pixelCrop.width,
+            pixelCrop.height,
+            0,
+            0,
+            pixelCrop.width,
+            pixelCrop.height
+        )
+    }
 }

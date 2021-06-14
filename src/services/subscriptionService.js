@@ -1,21 +1,23 @@
-// import { storageService } from './asyncStorageService'
 import { httpService } from './httpService'
 
 export const subscriptionService = {
-    query,
+    getFollowers,
+    getFollowing,
     add,
     remove
 }
 
-function query() {
-    // return storageService.query('like')
-    return httpService.get('subscription')
+function getFollowers(username) {
+    return httpService.get(`subscription/followers/${username}`)
+}
+function getFollowing(username) {
+    return httpService.get(`subscription/following/${username}`)
 }
 
-function add(user) {
-    return httpService.post('subscription', user)
+function add(subscription) {
+    return httpService.post('subscription', subscription)
 }
 
-function remove(user) {
-    return httpService.delete('subscription', user)
+function remove(subscription) {
+    return httpService.delete('subscription', subscription)
 }

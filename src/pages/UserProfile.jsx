@@ -1,64 +1,106 @@
-import { Fragment, useEffect, useState } from 'react'
-import { Link, useParams } from "react-router-dom"
+import { Fragment, useContext, useEffect, useState } from 'react'
+import { Link, NavLink, useParams } from "react-router-dom"
 import { connect } from 'react-redux'
 import Skeleton from 'react-loading-skeleton'
 import { userService } from '../services/userService'
 import { UserPosts } from '../cmps/UserPosts'
+import { subscriptionService } from '../services/subscriptionService'
 import { UserSuggestions } from '../cmps/UserSuggestions'
+import { WindowDataContext } from '../App'
+import { isMobileOnly } from 'react-device-detect'
+import { editUser } from '../store/actions/userActions'
 
-const _UserProfile = ({ loggedInUser }) => {
+const _UserProfile = ({ loggedInUser, editUser }) => {
 
     const { username, currTab } = useParams(null)
-    const [user, setUser] = useState({})
-    const [suggestionsOpen, toggleSuggestionsOpen] = useState(false)
-    const loggedInUserPage = user._id === loggedInUser._id
-    const isFollowedByMe = !loggedInUserPage &&
-        loggedInUser.following.some(followee => {
-            return followee.aboutUserId === user._id
+    const [mainState, setMainState] = useState({
+        user: {},
+        followers: [],
+        following: []
+    })
+    const { user, followers, following } = mainState
+    const [suggestionsOpen, setSuggestionsOpen] = useState(false)
+    const { windowData } = useContext(WindowDataContext)
+    const isMobileWidth = windowData.windowWidth <= 735
+    const userExists = Object.keys(user).length
+    const isLoggedInUserPage = username === loggedInUser.username
+    const isFollowedByMe = !isLoggedInUserPage &&
+        followers?.some(follower => {
+            return follower.byUser.username === loggedInUser.username
         })
 
     useEffect(() => {
-        (async () =>
-            setUser(await userService.getByUsername(username)))()
+        (async () => {
+            setMainState({
+                user: await userService.getByUsername(username),
+                followers: await subscriptionService.getFollowers(username),
+                following: await subscriptionService.getFollowing(username)
+            })
+        })()
         document.title = user.fullname ?
             `${user.fullname} (@${username}) \u2022 Instapound`
             : `${username} \u2022 Instapound`
     }, [username, user.fullname])
 
-    return <section className="user-profile-container flex col grow">
-        <main className="user-profile main-layout m-page">
-            <header className="flex">
-                <div className="user-img-container grow">
-                    {Object.keys(user).length ? <img className="user-img" src={user.imgUrl} alt="" />
-                        : <Skeleton circle height={150} width={150} />}
-                </div>
-                {Object.keys(user).length ? <div className="user-info-container flex col">
-                    <header className="flex a-center">
-                        <label>{user.username}</label>
-                        <div className="flex a-center">
-                            <div className="action-btns-container flex a-center">
-                                {loggedInUserPage ? <button className="btn-edit-profile">
-                                    <Link to="">Edit Profile</Link>
-                                </button>
-                                    : isFollowedByMe ? <Fragment>
-                                        <button className="btn-message" aria-label="Message">Message</button>
-                                        <button className="btn-unfollow" aria-label="Following">
-                                            <span></span>
-                                        </button>
-                                        <button className={`btn-suggestions ${suggestionsOpen ? 'suggestions-open' : ''}`}
-                                            aria-label="Suggestions" onClick={() => toggleSuggestionsOpen(!suggestionsOpen)}>
-                                            <svg aria-label="Down Chevron Icon" fill="#262626" height="12" viewBox="0 0 48 48" width="12">
-                                                <path d="M40 33.5c-.4 0-.8-.1-1.1-.4L24 18.1l-14.9 15c-.6.6-1.5.6-2.1 0s-.6-1.5
-                                         0-2.1l16-16c.6-.6 1.5-.6 2.1 0l16 16c.6.6.6 1.5 0 2.1-.3.3-.7.4-1.1.4z"></path>
-                                            </svg>
-                                        </button>
-                                    </Fragment>
-                                        : <button className="btn-follow">Follow</button>}
-                            </div>
-                            <div className="btn-options-container">
-                                {loggedInUserPage ? <button className="btn-options">
-                                    <svg aria-label="Options" fill="#262626" height="24" viewBox="0 0 48 48" width="24">
-                                        <path clipRule="evenodd" d="M46.7 20.6l-2.1-1.1c-.4-.2-.7-.5-.8-1-.5-1.6-1.1-3.2-1.9-4.7-.2-.4-.3-.8-.1-1.2l.8-2.3c.2-.5
+    const onFollowUser = async () => {
+        try {
+            if (isFollowedByMe || !userExists) return
+            await subscriptionService.add({
+                byUsername: loggedInUser.username,
+                aboutUsername: username
+            })
+            setMainState({
+                ...mainState,
+                followers: await subscriptionService.getFollowers(username)
+            })
+        } catch (err) {
+            // SNACKBAR DOCKED TO BOTTOM
+        }
+    }
+    const onUnfollowUser = async () => {
+        try {
+            if (!isFollowedByMe || !userExists) return
+            await subscriptionService.remove({
+                byUsername: loggedInUser.username,
+                aboutUsername: username
+            })
+            setMainState({
+                ...mainState,
+                followers: await subscriptionService.getFollowers(username)
+            })
+        } catch (err) {
+            // SNACKBAR DOCKED TO BOTTOM
+        }
+    }
+
+    const userStats = (
+        userExists && <main className="user-stats-container flex">
+            <div>
+                <label className="text">
+                    <span className="fw600">{user?.posts?.length}</span> posts
+                </label>
+            </div>
+            <div>
+                <label>
+                    <Link to={`/${user.username}/followers/`}>
+                        <span className="fw600">{followers?.length}</span> followers
+                    </Link>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <Link to={`/${user.username}/following/`}>
+                        <span className="fw600">{following?.length}</span> following
+                    </Link>
+                </label>
+            </div>
+        </main>
+    )
+
+    const gearOptionsBtnSvg = (
+        <Link className="btn-options" to="/accounts/edit/">
+            <svg aria-label="Options" fill="#262626" height="24" viewBox="0 0 48 48" width="24">
+                <path clipRule="evenodd" d="M46.7 20.6l-2.1-1.1c-.4-.2-.7-.5-.8-1-.5-1.6-1.1-3.2-1.9-4.7-.2-.4-.3-.8-.1-1.2l.8-2.3c.2-.5
                          0-1.1-.4-1.5l-2.9-2.9c-.4-.4-1-.5-1.5-.4l-2.3.8c-.4.1-.8.1-1.2-.1-1.4-.8-3-1.5-4.6-1.9-.4-.1-.8-.4-1-.8l-1.1-2.2c-.3-.5-.8-.8-1.3-.8h-4.1c-.6
                           0-1.1.3-1.3.8l-1.1 2.2c-.2.4-.5.7-1 .8-1.6.5-3.2 1.1-4.6 1.9-.4.2-.8.3-1.2.1l-2.3-.8c-.5-.2-1.1 0-1.5.4L5.9 8.8c-.4.4-.5
                            1-.4 1.5l.8 2.3c.1.4.1.8-.1 1.2-.8 1.5-1.5 3-1.9 4.7-.1.4-.4.8-.8 1l-2.1 1.1c-.5.3-.8.8-.8 1.3V26c0 .6.3 1.1.8 1.3l2.1
@@ -67,31 +109,86 @@ const _UserProfile = ({ loggedInUser }) => {
                               4.6-1.9.4-.2.8-.3 1.2-.1l2.3.8c.5.2 1.1 0 1.5-.4l2.9-2.9c.4-.4.5-1 .4-1.5l-.8-2.3c-.1-.4-.1-.8.1-1.2.8-1.5 1.5-3
                                1.9-4.7.1-.4.4-.8.8-1l2.1-1.1c.5-.3.8-.8.8-1.3v-4.1c.4-.5.1-1.1-.4-1.3zM24 41.5c-9.7 0-17.5-7.8-17.5-17.5S14.3
                                 6.5 24 6.5 41.5 14.3 41.5 24 33.7 41.5 24 41.5z" fillRule="evenodd"></path>
-                                    </svg>
+            </svg>
+        </Link>
+    )
+    const dotsOptionsBtnSvg = (
+        <button className="btn-options">
+            <svg aria-label="Options" fill="#262626" height="24" viewBox="0 0 48 48" width="24">
+                <circle clipRule="evenodd" cx="8" cy="24" fillRule="evenodd" r="4.5"></circle>
+                <circle clipRule="evenodd" cx="24" cy="24" fillRule="evenodd" r="4.5"></circle>
+                <circle clipRule="evenodd" cx="40" cy="24" fillRule="evenodd" r="4.5"></circle>
+            </svg>
+        </button>
+    )
+    const mobileHeader = (
+        <header className="mobile-header">
+            <div>
+                {isLoggedInUserPage ? gearOptionsBtnSvg : <button>
+                    <span style={{ display: 'inline-block', transform: 'rotate(270deg)' }}>
+                        <svg aria-label="Back" fill="#262626" height="24" viewBox="0 0 48 48" width="24">
+                            <path d="M40 33.5c-.4 0-.8-.1-1.1-.4L24 18.1l-14.9 15c-.6.6-1.5.6-2.1 0s-.6-1.5
+                             0-2.1l16-16c.6-.6 1.5-.6 2.1 0l16 16c.6.6.6 1.5 0 2.1-.3.3-.7.4-1.1.4z"></path>
+                        </svg>
+                    </span>
+                </button>}
+                <div className="fw600">
+                    <NavLink to="/" exact={true} replace>{username}</NavLink>
+                </div>
+                <NavLink className={isLoggedInUserPage ? '' : 'hidden'} to="/explore/people/suggested/">
+                    <svg aria-label="Discover People" fill="#262626" height="24" viewBox="0 0 48 48" width="24">
+                        <path d="M32 25.5c5.2 0 9.5-4.3 9.5-9.5S37.2 6.5 32 6.5s-9.5 4.3-9.5 9.5 4.3 9.5 9.5 9.5zm0-16c3.6 0
+                     6.5 2.9 6.5 6.5s-2.9 6.5-6.5 6.5-6.5-2.9-6.5-6.5 2.9-6.5 6.5-6.5zm5.5 19h-11c-5.5 0-10 4.5-10 10V40c0
+                      .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-1.5c0-3.9 3.1-7 7-7h11c3.9 0 7 3.1 7 7V40c0 .8.7 1.5 1.5 1.5s1.5-.7
+                       1.5-1.5v-1.5c0-5.5-4.5-10-10-10zm-20-4.5c0-.8-.7-1.5-1.5-1.5h-5.5V17c0-.8-.7-1.5-1.5-1.5s-1.5.7-1.5
+                        1.5v5.5H2c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5h5.5V31c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-5.5H16c.8 0 1.5-.7 1.5-1.5z"></path>
+                    </svg>
+                </NavLink>
+            </div>
+        </header>
+    )
+
+    return <section className="user-profile-container flex col grow">
+
+        {isMobileOnly && mobileHeader}
+
+        <main className="user-profile main-layout m-page">
+            <header className="flex">
+                <div className="user-img-container grow">
+                    {userExists ? <img className="user-img" src={user.imgUrl} alt="" />
+                        : <Skeleton circle height={150} width={150} />}
+                </div>
+                {userExists ? <div className="user-info-container flex col">
+                    <header className="flex a-center">
+                        <label>{user.username}</label>
+                        <div className="flex a-center">
+                            <div className="action-btns-container flex a-center">
+                                {isLoggedInUserPage ? <button className="btn-edit-profile">
+                                    <Link to="/accounts/edit/">Edit Profile</Link>
                                 </button>
-                                    : <button className="btn-options">
-                                        <svg aria-label="Options" fill="#262626" height="24" viewBox="0 0 48 48" width="24">
-                                            <circle clipRule="evenodd" cx="8" cy="24" fillRule="evenodd" r="4.5"></circle>
-                                            <circle clipRule="evenodd" cx="24" cy="24" fillRule="evenodd" r="4.5"></circle>
-                                            <circle clipRule="evenodd" cx="40" cy="24" fillRule="evenodd" r="4.5"></circle>
-                                        </svg>
-                                    </button>}
+                                    : isFollowedByMe ? <Fragment>
+                                        <button className="btn-message" aria-label="Message">Message</button>
+                                        <button className="btn-unfollow" aria-label="Following" onClick={onUnfollowUser}>
+                                            <span></span>
+                                        </button>
+                                        <button className={`btn-suggestions ${suggestionsOpen ? 'suggestions-open' : ''}`}
+                                            aria-label="Suggestions" onClick={() => setSuggestionsOpen(!suggestionsOpen)}>
+                                            <svg aria-label="Down Chevron Icon" fill="#262626" height="12" viewBox="0 0 48 48" width="12">
+                                                <path d="M40 33.5c-.4 0-.8-.1-1.1-.4L24 18.1l-14.9 15c-.6.6-1.5.6-2.1 0s-.6-1.5
+                                         0-2.1l16-16c.6-.6 1.5-.6 2.1 0l16 16c.6.6.6 1.5 0 2.1-.3.3-.7.4-1.1.4z"></path>
+                                            </svg>
+                                        </button>
+                                    </Fragment>
+                                        : <button className="btn-follow" aria-label="Follow" onClick={onFollowUser}>Follow</button>}
+                            </div>
+                            <div className="btn-options-container">
+                                {isLoggedInUserPage ? (isMobileOnly ? null
+                                    : gearOptionsBtnSvg)
+                                    : dotsOptionsBtnSvg}
                             </div>
                         </div>
                     </header>
-                    <main>
-                        <label className="text"><span>{user.posts.length}</span> posts</label>
-                        <label>
-                            <Link to={`/${user.username}/followers/`}>
-                                <span>{user.followers.length}</span> followers
-                            </Link>
-                        </label>
-                        <label>
-                            <Link to={`/${user.username}/following/`}>
-                                <span>{user.following.length}</span> following
-                            </Link>
-                        </label>
-                    </main>
+                    {!isMobileWidth && userStats}
                     <footer>
                         <h1>{user.fullname}</h1>
                         <span>{user.bio}</span>
@@ -100,6 +197,7 @@ const _UserProfile = ({ loggedInUser }) => {
             </header>
 
             {suggestionsOpen && <UserSuggestions />}
+            {isMobileWidth && userStats}
 
             <main>
                 <div className="tab-switch-container flex j-center a-center">
@@ -151,7 +249,7 @@ const _UserProfile = ({ loggedInUser }) => {
                     </Link>
                 </div>
                 {!currTab ? <UserPosts username={username} />
-                    : <label className="muted">Not available yet...</label>}
+                    : <label className="not-available muted">Not available yet...</label>}
             </main>
         </main>
     </section>
@@ -162,4 +260,7 @@ const mapStateToProps = state => {
         loggedInUser: state.userModule.loggedInUser
     }
 }
-export const UserProfile = connect(mapStateToProps)(_UserProfile)
+const mapDispatchToProps = {
+    editUser
+}
+export const UserProfile = connect(mapStateToProps, mapDispatchToProps)(_UserProfile)

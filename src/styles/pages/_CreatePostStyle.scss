@@ -1,0 +1,13 @@
+.create-post-style {
+    width: 100%;
+    height: 100%;
+    > button.btn-continue {
+        margin-inline-start: auto;
+        margin-top: 25px;
+        font-weight: 600;
+        color: white;
+        background-color: #0095f6;
+        padding: 10px 15px;
+        border-radius: 4px;
+    }
+}

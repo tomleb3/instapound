@@ -10,10 +10,11 @@ import { UserProfile } from './pages/UserProfile.jsx'
 import { About } from './pages/About.jsx'
 import { AppHeader } from './cmps/AppHeader.jsx'
 import { AppFooter } from './cmps/AppFooter.jsx'
-import { CreatePost } from './pages/CreatePost.jsx'
 import { PostDetails } from './pages/PostDetails.jsx'
 import { MobileDock } from './cmps/MobileDock.jsx'
 import { isMobileOnly } from 'react-device-detect'
+import { CreatePostDetails } from './pages/CreatePostDetails.jsx'
+import { CreatePostStyle } from './pages/CreatePostStyle.jsx'
 
 export const WindowDataContext = createContext(null)
 
@@ -39,29 +40,40 @@ const _App = ({ loggedInUser }) => {
   }
 
   return (
-    <main className="App flex col full-height" role="main">
+    <main className="App flex col fill" role="main">
       <WindowDataContext.Provider value={{ windowData }}>
         {!loggedInUser ? <LoginSignup /> :
           <Fragment>
-            <AppHeader />
+            {!isMobileOnly && <AppHeader />}
             <Switch>
-              <Route path="/p/:id" render={() => <Fragment>
+
+              <Route path="/p/:id/" render={() => <Fragment>
                 <PostDetails />
-                <AppFooter />
+                {!isMobileOnly && <AppFooter />}
               </Fragment>} />
+
               <Route path="/about/" component={About} />
+
               <Route path="/activity/" component={Activity} />
+
               <Route path="/explore/" render={() => <Fragment>
                 <Explore />
-                <AppFooter />
+                {!isMobileOnly && <AppFooter />}
               </Fragment>} />
+
               <Route path="/direct/" component={Direct} />
-              <Route path="/create/:currTab/" component={CreatePost} />
+
+              <Route path="/create/details/" component={CreatePostDetails} />
+
+              <Route path="/create/style/" component={CreatePostStyle} />
+
               <Route path="/:username/:currTab?/" render={() => <Fragment>
                 <UserProfile />
-                <AppFooter />
+                {!isMobileOnly && <AppFooter />}
               </Fragment>} />
+
               <Route path="/" exact component={Home} />
+              
             </Switch>
             {isMobileOnly && <MobileDock />}
           </Fragment>}

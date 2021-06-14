@@ -2,7 +2,7 @@ export const Explore = () => {
 
     document.title = 'Instapound'
 
-    return <main className="explore-page">
+    return <main className="explore-page main-layout fill">
 
     </main>
 }

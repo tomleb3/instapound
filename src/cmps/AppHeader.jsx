@@ -8,7 +8,9 @@ const _AppHeader = ({ loggedInUser }) => {
 
     return <header className="app-header">
         <section className="main-layout flex j-between a-center">
-            <div className="logo"><NavLink to="/" exact={true} replace>Instapound</NavLink></div>
+            <div className="logo">
+                <NavLink to="/" exact={true} replace>Instapound</NavLink>
+            </div>
             <div className="filter-container">
                 <AppFilter />
             </div>
@@ -67,7 +69,7 @@ const _AppHeader = ({ loggedInUser }) => {
                     </svg>
                 </NavLink>
                 <NavLink className="flex a-center j-center" to={`/${loggedInUser.username}/`}>
-                {currPage === `/${loggedInUser.username}/` && <div className="img-border"></div>}
+                    {currPage === `/${loggedInUser.username}/` && <div className="img-border"></div>}
                     <img src={loggedInUser.imgUrl} alt={`${loggedInUser.username}'s profile picture`} />
                 </NavLink>
             </nav>

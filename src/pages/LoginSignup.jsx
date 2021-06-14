@@ -8,7 +8,7 @@ import {
 } from '../store/actions/userActions'
 // import { socketService } from '../services/socketService'
 
-const _LoginSignup = ({ loggedInUser, login, signup, }) => {
+const _LoginSignup = ({ loggedInUser, login, signup }) => {
 
     const cloudinaryBaseUrl = process.env.REACT_APP_CLOUDINARY_BASE_URL
     const currPage = useLocation().pathname

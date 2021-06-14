@@ -28,6 +28,26 @@ body {
     #root {
         height: inherit;
     }
+    .logo {
+        font-size: 1.6em;
+        font-family: instapound;
+    }
+    .mobile-header {
+        flex-wrap: wrap;
+        font-size: 16px;
+        left: 0;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 1;
+        > div {
+            padding: 0 16px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
 }
 
 body,

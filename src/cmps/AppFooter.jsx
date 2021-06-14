@@ -2,8 +2,8 @@ import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 
 const _AppFooter = ({ loggedInUser, homePage }) => {
-    return <section className={`app-footer main-layout ${homePage && 'for-home-page'}`}>
-        <div className={`links-container flex wrap ${!homePage && 'j-center'}`}>
+    return <footer className={`app-footer main-layout ${homePage ? 'for-home-page' : ''}`}>
+        <div className={`links-container flex wrap ${!homePage ? 'j-center' : ''}`}>
             <Link to="">About</Link>
             {homePage ? <Link to="">Help</Link>
                 : <Link to="">Blog</Link>}
@@ -23,7 +23,7 @@ const _AppFooter = ({ loggedInUser, homePage }) => {
                 : <Link to="">Locations</Link>}
             {homePage && <Link to="">Language</Link>}
         </div>
-        <div className={`lang-copyright-container flex ${!homePage && 'j-center'}`}>
+        <div className={`lang-copyright-container flex ${!homePage ? 'j-center' : ''}`}>
             <div className="flex a-center pointer">
                 <span className="capitalize">{loggedInUser.language}</span>
                 <svg aria-label="Down Chevron Icon" className="_8-yf5 " fill="#8e8e8e" height="12" viewBox="0 0 48 48" width="12">
@@ -33,7 +33,7 @@ const _AppFooter = ({ loggedInUser, homePage }) => {
             </div>
             <label>© {new Date().getFullYear()} Instapound not from Facebook</label>
         </div>
-    </section >
+    </footer>
 }
 
 const mapStateToProps = state => {

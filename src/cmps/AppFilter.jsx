@@ -5,7 +5,7 @@ import { userService } from '../services/userService'
 export const AppFilter = () => {
 
     const [filterTxt, setFilterTxt] = useState('')
-    const [isLoading, toggleIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const [users, setUsers] = useState([])
     const usersExist = users && users.length
 
@@ -13,11 +13,12 @@ export const AppFilter = () => {
         filterTxt ? debounce(onFilter) : clearUsers()
     }, [filterTxt])
 
-    useEffect(() =>
-        toggleIsLoading(false), [users])
+    useEffect(() => {
+        setIsLoading(false)
+    }, [users])
 
     const debounce = (func, delay = 750) => {
-        toggleIsLoading(true)
+        setIsLoading(true)
         setTimeout(() => func(), delay)
     }
 
