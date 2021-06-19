@@ -12,7 +12,7 @@ export const CommentRender = ({ post, comments, collapsedView }) => {
         </div>
 
         <div>{comments.length > 2 &&
-            <Link to={`p/${post._id}`} className="muted fw400">View all <span>{comments.length}</span> comments</Link>}
+            <Link to={`p/${post._id}/`} className="muted fw400">View all <span>{comments.length}</span> comments</Link>}
         </div>
 
         <ul className="clean-list">

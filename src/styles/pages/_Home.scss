@@ -3,10 +3,12 @@
     padding-top: 30px;
     @media (max-width: 999px) {
         flex-direction: column;
+        align-items: center;
         > .left-panel {
             display: flex;
             flex-direction: column;
             align-items: center;
+            max-width: unset;
         }
         > .right-panel {
             display: none;
@@ -14,6 +16,9 @@
     }
     > header.mobile-header > div {
         height: 44px;
+    }
+    > .left-panel {
+        max-width: 616px;
     }
     > .right-panel {
         position: sticky;

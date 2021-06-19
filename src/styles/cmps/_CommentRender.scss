@@ -10,12 +10,16 @@
 }
 
 .comment-section-container {
-    padding: 12px 16px;
-    height: calc(100% - 32px);
-    width: calc(100% - 8px);
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
     > .comment-section {
-        padding: 12px 0;
+        overflow-y: scroll;
+        box-sizing: content-box;
+        padding: 16px;
         font-size: rem(14px);
+        height: inherit;
+        width: inherit;
         a {
             font-weight: 600;
         }
