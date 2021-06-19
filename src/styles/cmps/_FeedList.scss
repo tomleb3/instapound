@@ -1,0 +1,33 @@
+.feed-list {
+    > .loader-container {
+        .react-loading-skeleton {
+            margin-bottom: 60px;
+        }
+    }
+    > .blank-feed {
+        margin-top: 70px;
+        max-width: 500px;
+        text-align: center;
+        > img {
+            width: 100%;
+            padding: 16px;
+            margin-bottom: 15px;
+            opacity: 0.3;
+        }
+        > span {
+            color: $clr-muted-txt;
+            display: block;
+            line-height: 18px;
+            > a {
+                color: $clr-active-link;
+            }
+        }
+    }
+    @media (max-width: 999px) {
+        > .loader-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+}

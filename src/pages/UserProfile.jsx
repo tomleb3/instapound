@@ -1,5 +1,5 @@
 import { Fragment, useContext, useEffect, useState } from 'react'
-import { Link, NavLink, useParams } from "react-router-dom"
+import { Link, NavLink, useHistory, useParams } from "react-router-dom"
 import { connect } from 'react-redux'
 import Skeleton from 'react-loading-skeleton'
 import { userService } from '../services/userService'
@@ -13,6 +13,7 @@ import { editUser } from '../store/actions/userActions'
 const _UserProfile = ({ loggedInUser, editUser }) => {
 
     const { username, currTab } = useParams(null)
+    const history = useHistory(null)
     const [mainState, setMainState] = useState({
         user: {},
         followers: [],
@@ -31,11 +32,15 @@ const _UserProfile = ({ loggedInUser, editUser }) => {
 
     useEffect(() => {
         (async () => {
-            setMainState({
-                user: await userService.getByUsername(username),
-                followers: await subscriptionService.getFollowers(username),
-                following: await subscriptionService.getFollowing(username)
-            })
+            try {
+                setMainState({
+                    user: await userService.getByUsername(username),
+                    followers: await subscriptionService.getFollowers(username),
+                    following: await subscriptionService.getFollowing(username)
+                })
+            } catch (err) {
+                history.push('/unavailable/')
+            }
         })()
         document.title = user.fullname ?
             `${user.fullname} (@${username}) \u2022 Instapound`
@@ -155,7 +160,7 @@ const _UserProfile = ({ loggedInUser, editUser }) => {
         <main className="user-profile main-layout m-page">
             <header className="flex">
                 <div className="user-img-container grow">
-                    {userExists ? <img className="user-img" src={user.imgUrl} alt="" />
+                    {userExists ? <img className="user-img" src={user.imgUrl} alt={`${user.username}'s profile picture`} />
                         : <Skeleton circle height={150} width={150} />}
                 </div>
                 {userExists ? <div className="user-info-container flex col">

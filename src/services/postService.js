@@ -9,8 +9,8 @@ export const postService = {
     remove
 }
 
-function getFeed(loggedInUserId) {
-    return httpService.get(`post/feed/${loggedInUserId}`)
+function getFeed(username) {
+    return httpService.get(`post/feed/${username}`)
 }
 
 function getUserPosts(username) {

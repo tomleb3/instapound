@@ -1,2 +1,15 @@
 .page-unavailable {
+    padding: 40px;
+    text-align: center;
+    > span {
+        font-weight: 600;
+        font-size: rem(22px);
+    }
+    > div {
+        margin-top: 40px;
+        margin-bottom: 20px;
+        > p > a {
+            color: $clr-visited-link;
+        }
+    }
 }

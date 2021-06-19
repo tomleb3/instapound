@@ -15,6 +15,7 @@ import { MobileDock } from './cmps/MobileDock.jsx'
 import { isMobileOnly } from 'react-device-detect'
 import { CreatePostDetails } from './pages/CreatePostDetails.jsx'
 import { CreatePostStyle } from './pages/CreatePostStyle.jsx'
+import { PageUnavailable } from './pages/PageUnavailable.jsx'
 
 export const WindowDataContext = createContext(null)
 
@@ -47,6 +48,8 @@ const _App = ({ loggedInUser }) => {
             {!isMobileOnly && <AppHeader />}
             <Switch>
 
+              <Route path="/unavailable/" exact component={PageUnavailable} />
+
               <Route path="/p/:id/" render={() => <Fragment>
                 <PostDetails />
                 {!isMobileOnly && <AppFooter />}
@@ -55,7 +58,7 @@ const _App = ({ loggedInUser }) => {
               <Route path="/about/" component={About} />
 
               <Route path="/activity/" component={Activity} />
-
+              
               <Route path="/explore/" render={() => <Fragment>
                 <Explore />
                 {!isMobileOnly && <AppFooter />}
@@ -73,7 +76,7 @@ const _App = ({ loggedInUser }) => {
               </Fragment>} />
 
               <Route path="/" exact component={Home} />
-              
+
             </Switch>
             {isMobileOnly && <MobileDock />}
           </Fragment>}
