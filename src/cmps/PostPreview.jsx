@@ -44,15 +44,12 @@ const _PostPreview = ({ post, loggedInUser, feedView }) => {
     const onAddComment = async ev => {
         ev.preventDefault()
         try {
-            await commentService.add({ newCommentTxt, aboutPostId: post._id })
+            await commentService.add({
+                txt: newCommentTxt,
+                byUsername: loggedInUser.username,
+                aboutPostId: post._id
+            })
             setNewCommentTxt('')
-            onCommentAdded()
-        } catch (err) {
-            // SNACKBAR DOCKED TO BOTTOM
-        }
-    }
-    const onCommentAdded = async () => {
-        try {
             setComments(await commentService.query(post))
         } catch (err) {
             // SNACKBAR DOCKED TO BOTTOM

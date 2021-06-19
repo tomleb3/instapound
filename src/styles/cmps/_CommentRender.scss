@@ -18,8 +18,8 @@
         box-sizing: content-box;
         padding: 16px;
         font-size: rem(14px);
-        height: inherit;
-        width: inherit;
+        height: calc(100% - 32px);
+        width: calc(100% - 8px);
         a {
             font-weight: 600;
         }

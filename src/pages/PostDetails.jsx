@@ -30,7 +30,7 @@ export const PostDetails = () => {
         `${new Date(post.createdAt).toLocaleDateString('en-US', { dateStyle: 'long' })}
         at ${new Date(post.createdAt).toLocaleTimeString('en-US', { timeStyle: 'short' })}`
 
-    if (!postExists) return <div></div>
+    if (!postExists) return <div className="fill"></div>
     return <section className="post-details-container">
         <main className="post-details main-layout">
             <div className="post-panel">

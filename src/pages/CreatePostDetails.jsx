@@ -44,7 +44,7 @@ const _CreatePostDetails = ({ loggedInUser, imgFile, blobUrl }) => {
         })
     }
 
-    return <section className="create-post-details flex a-center">
+    return <section className="create-post-details main-layout m-page flex a-center">
         <img className="user-img" src={loggedInUser.imgUrl} alt="User" />
         <textarea placeholder="Write a caption..." onScroll={onTxtAreaScroll}
             ref={txtAreaRef} autoCorrect="off" autoComplete="off" />
