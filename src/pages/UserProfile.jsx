@@ -79,7 +79,7 @@ const _UserProfile = ({ loggedInUser, editUser }) => {
     }
 
     const userStats = (
-        userExists && <main className="user-stats-container flex">
+        userExists ? <main className="user-stats-container flex">
             <div>
                 <label className="text">
                     <span className="fw600">{user?.posts?.length}</span> posts
@@ -100,6 +100,7 @@ const _UserProfile = ({ loggedInUser, editUser }) => {
                 </label>
             </div>
         </main>
+            : null
     )
 
     const gearOptionsBtnSvg = (
@@ -155,7 +156,7 @@ const _UserProfile = ({ loggedInUser, editUser }) => {
 
     return <section className="user-profile-container flex col grow">
 
-        {isMobileOnly && mobileHeader}
+        {isMobileOnly ? mobileHeader : null}
 
         <main className="user-profile main-layout m-page">
             <header className="flex">
@@ -193,7 +194,7 @@ const _UserProfile = ({ loggedInUser, editUser }) => {
                             </div>
                         </div>
                     </header>
-                    {!isMobileWidth && userStats}
+                    {!isMobileWidth ? userStats : null}
                     <footer>
                         <h1>{user.fullname}</h1>
                         <span>{user.bio}</span>
@@ -201,8 +202,8 @@ const _UserProfile = ({ loggedInUser, editUser }) => {
                 </div> : <Skeleton />}
             </header>
 
-            {suggestionsOpen && <UserSuggestions />}
-            {isMobileWidth && userStats}
+            {suggestionsOpen ? <UserSuggestions /> : null}
+            {isMobileWidth ? userStats : null}
 
             <main>
                 <div className="tab-switch-container flex j-center a-center">
